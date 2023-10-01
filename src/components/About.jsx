@@ -1,53 +1,140 @@
+import { useState } from 'react'
 import { motion } from 'framer-motion'
-import {styles} from '../style'
+import { styles } from '../style'
 import { Tilt } from 'react-tilt'
 import { services } from '../constants'
-import {fadeIn, textVariant} from '../utils/motion'
+import { fadeIn, textVariant } from '../utils/motion'
 import { SectionWrapper } from '../hoc'
 
-const ServiceCard = ({index,title,icon,details,price,register}) => {
+
+const Popup = ({ index, title, icon, details, price, register, onRegisterClick }) => {
   return (
-   <Tilt className="xs:w-[580px] w-full">
-    <motion.div
-    variants={fadeIn("right","spring",0.5*index,0.75)}
-    className='w-full green-pink-gradient p-[1px] rounded-[20px] shadow-card'>
-      <div options={{
-        max:25,
-        scale:1,
-        speed:450,
-      }}
-      className='bg-tertiary rounded-[20px] py-6 px-12 min-h-[380px] flex justify-evenly items-center flex-col'>
-        <img src={icon} alt={title} className='w-20 h-20 object-contain' />
-        <h1 className='text-white text-[20px] font-bold text-center my-4'>{title}</h1>
-        <p className='text-white text-[16px] font-medium text-center'>{details}</p>
-        <div className="flex justify-between w-full mt-2">
-        <p className='text-white text-[16px] font-medium text-center mt-6'>Price: <span className='text-[#915eff]'>{price}</span></p>
-        <button className='bg-[#915eff] text-white text-[16px] mt-2 font-medium py-2 px-4 rounded-[10px] hover:bg-[#7d4fff] transition-all duration-200' onClick={()=>window.open(register,'_blank')}>Register</button>
+    <div>
+      <div className="fixed inset-0 bg-black opacity-50"></div>
+      <div className="fixed inset-0 flex items-center justify-center z-50">
+        <div
+          className="bg-white rounded-lg overflow-hidden shadow-lg relative z-10 w-1/3">
+          <div className="p-6">
+            <div className="flex justify-between items-center">
+              <h2 className="text-xl text-black font-semibold mb-4">{title}</h2>
+              <button className="text-black text-2xl hover:text-gray-400 transition-all duration-200"
+                onClick={() => {
+                  setSelectedId(null);
+                }
+                }>
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none"
+                  viewBox="0 0 24 24" stroke="currentColor"
+                  onClick={() => {
+                    onRegisterClick();
+                  }}>
+                  <path strokeLinecap="round" strokeLinejoin="round"
+                    strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+            <div className="flex items-center">
+              <p className="text-gray-500 text-sm">{details}</p>
+            </div>
+            <div className="flex justify-between items-center">
+              <p className="text-gray-500 text-sm">{price}</p>
+              <button className="bg-[#915eff] text-white text-[16px] font-medium py-2 px-4 rounded-[10px] hover:bg-[#7d4fff] transition-all duration-200"
+              >Register</button>
+            </div>
+          </div>
         </div>
+      </div>
+    </div>
+  );
+};
+
+
+const ServiceCard = ({ index, title, icon, details, price, register, onRegisterClick }) => {
+  return (
+    <Tilt className="xs:w-[580px] w-full">
+      <motion.div
+        variants={fadeIn("right", "spring", 0.5 * index, 0.75)}
+        className='w-full green-pink-gradient p-[1px] rounded-[20px] shadow-card'>
+        <div options={{
+          max: 25,
+          scale: 1,
+          speed: 450,
+        }}
+          className='bg-tertiary rounded-[20px] py-6 px-12 min-h-[380px] flex justify-evenly items-center flex-col'>
+          <img src={icon} alt={title} className='w-20 h-20 object-contain' />
+          <h1 className='text-white text-[20px] font-bold text-center my-4'>{title}</h1>
+          <p className='text-white text-[16px] font-medium text-center'>{details}</p>
+          <div className="flex justify-between w-full mt-2">
+            <p className='text-white text-[16px] font-medium text-center mt-6'>Price: <span className='text-[#915eff]'>{price}</span></p>
+            <button className='bg-[#915eff] text-white text-[16px] mt-2 font-medium py-2 px-4 rounded-[10px] hover:bg-[#7d4fff] transition-all duration-200'
+              onClick={() => {
+                onRegisterClick();
+              }}>Register</button>
+          </div>
         </div>
-    </motion.div>
-   </Tilt>
+      </motion.div>
+    </Tilt>
   )
 }
 const About = () => {
+  const [data, setData] = useState(services);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedId, setSelectedId] = useState(null)
+
+  const handleValue = (e) => {
+    setSearchTerm(e.target.value);
+  };
+
+
+  const handleSearch = () => {
+    try {
+      if (searchTerm === null || searchTerm.trim() === '') {
+        setData(services);
+      } else {
+        const filteredData = services.filter((item) =>
+          item.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          item.details.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+        setData(filteredData);
+        console.log(filteredData, "filteredData");
+      }
+    } catch (error) {
+      console.error("An error occurred:", error);
+    }
+  };
+
+
+  const handleRegisterClick = (title) => {
+    setSelectedId(title);
+  }
+
   return (
-   <>
-   <motion.div>
-    
-      <h2 className={`${styles.sectionHeadText} text-center`}>Workshops</h2>
-      {/*seach bar */}
-      <div className='w-full flex justify-center items-center gap-4 mt-8'>
-        <input type='text' placeholder='Search' className='w-[400px] h-[50px] rounded-[10px] border-none outline-none px-4 text-[16px] font-medium' />
-        <button className='bg-[#915eff] text-white text-[16px] font-medium py-2 px-4 rounded-[10px] hover:bg-[#7d4fff] transition-all duration-200'>Search</button>
+    <>
+      <motion.div>
+        <h2 className={`${styles.sectionHeadText} text-center`}>Workshops</h2>
+        {/*seach bar */}
+        <div className='w-full flex justify-center items-center gap-4 mt-8'>
+          <input type='text' placeholder='Search' className='w-[400px] h-[50px] rounded-[10px] border-none outline-none px-4 text-[16px] font-medium' onChange={handleValue} />
+          <button className='bg-[#915eff] text-white text-[16px] font-medium py-2 px-4 rounded-[10px] hover:bg-[#7d4fff] transition-all duration-200' onClick={handleSearch}>Search</button>
+        </div>
+      </motion.div>
+      <div className='mt-16 flex flex-wrap gap-16 [&>img:not(:first-child)]:mt-5 lg:[&>img:not(:first-child)]:mt-8'>
+        {data.map((service, index) => (
+          <ServiceCard key={service.title} index={index} {...service}
+            onRegisterClick={() => handleRegisterClick(service.title)}
+          />
+        ))}
+        {selectedId &&
+          <div>
+            {services.map((service, index) => (
+              service.title === selectedId && <Popup key={service.title} index={index} {...service}
+                onRegisterClick={() => handleRegisterClick(null)}
+              />
+            ))}
+          </div>
+        }
       </div>
-     </motion.div>
-    <div className='mt-16 flex flex-wrap gap-16 [&>img:not(:first-child)]:mt-5 lg:[&>img:not(:first-child)]:mt-8'>
-      {services.map((service,index)=>(
-        <ServiceCard key={service.title} index={index} {...service} />
-      ))}
-    </div>
-   </>
+    </>
   )
 }
 
-export default SectionWrapper(About,"about")
+export default SectionWrapper(About, "about")
