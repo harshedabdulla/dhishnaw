@@ -50,7 +50,7 @@ const Popup = ({ index, title, icon, details, price, register, onRegisterClick }
 
 const ServiceCard = ({ index, title, icon, details, price, register, onRegisterClick }) => {
   return (
-    <Tilt className="md:w-[580px] w-full">
+    <Tilt className="md:w-[580px] sm:w-[480px] w-full">
       <motion.div
         variants={fadeIn("right", "spring", 0.5 * index, 0.75)}
         className='w-full green-pink-gradient p-[1px] rounded-[20px] shadow-card'>
