@@ -50,15 +50,10 @@ const Popup = ({ index, title, icon, details, price, register, onRegisterClick }
 
 const ServiceCard = ({ index, title, icon, details, price, register, onRegisterClick }) => {
   return (
-    <Tilt className="md:w-[580px] sm:w-[480px] w-full">
-      <motion.div
-        variants={fadeIn("right", "spring", 0.5 * index, 0.75)}
+    <div className="md:w-[580px] sm:w-[480px] w-full">
+      <div
         className='w-full green-pink-gradient p-[1px] rounded-[20px] shadow-card'>
-        <div options={{
-          max: 25,
-          scale: 1,
-          speed: 450,
-        }}
+        <div
           className='bg-tertiary rounded-[20px] py-6 px-4 md:px-12 min-h-[380px] flex flex-col justify-between items-center'>
           <div className="flex flex-col items-center">
             <img src={icon} alt={title} className='w-20 h-20 object-contain' />
@@ -73,8 +68,8 @@ const ServiceCard = ({ index, title, icon, details, price, register, onRegisterC
               }}>Register</button>
           </div>
         </div>
-      </motion.div>
-    </Tilt>
+      </div>
+    </div>
   )
 }
 const About = () => {
@@ -84,6 +79,19 @@ const About = () => {
 
   const handleValue = (e) => {
     setSearchTerm(e.target.value);
+    try {
+      if (searchTerm === null || searchTerm.trim() === '') {
+        setData(services);
+      } else {
+        const filteredData = services.filter((item) =>
+          item.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          item.details.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+        setData(filteredData);
+      }
+    } catch (error) {
+      console.error("An error occurred:", error);
+    }
   };
 
 
@@ -97,7 +105,6 @@ const About = () => {
           item.details.toLowerCase().includes(searchTerm.toLowerCase())
         );
         setData(filteredData);
-        console.log(filteredData, "filteredData");
       }
     } catch (error) {
       console.error("An error occurred:", error);
