@@ -49,16 +49,20 @@ const Popup = ({ index, title, icon, details, price, register, onRegisterClick }
 
 
 const ServiceCard = ({ index, title, icon, details, price, register, onRegisterClick }) => {
+  const [clamp, setClamp] = useState(false);
   return (
-    <div className="md:w-[580px] sm:w-[480px] w-full">
+    <div className="md:w-[580px] px-4 sm:w-[480px] w-full">
       <div
-        className='w-full green-pink-gradient p-[1px] rounded-[20px] shadow-card'>
+        className='w-full orange-red-gradient p-[1px] rounded-[20px] shadow-card'>
         <div
-          className='bg-tertiary rounded-[20px] py-6 px-4 md:px-12 min-h-[380px] flex flex-col justify-between items-center'>
+          className='bg-tertiary rounded-[20px] py-6 px-4 md:px-12 h-auto flex flex-col justify-between items-center'>
           <div className="flex flex-col items-center">
             <img src={icon} alt={title} className='w-20 h-20 object-contain' />
             <h1 className='text-white text-lg md:text-xl font-bold text-center my-4'>{title}</h1>
-            <p className='text-white text-sm md:text-base font-medium text-center'>{details}</p>
+            <p className={` ${clamp ?"line-clamp-none" :"line-clamp-3 md:line-clamp-6"}  text-white text-sm md:text-base font-medium text-center my-4`} 
+            onClick={() => {
+                setClamp(!clamp);
+              }}>{details}</p>
           </div>
           <div className="flex justify-between w-full mt-4 md:mt-6">
             <p className='text-white text-sm md:text-base font-medium text-center'>Price: <span className='text-[#FF884B]'>{price}</span></p>
