@@ -7,7 +7,7 @@ import axios from 'axios'
 const Login = () => {
 
   React.useEffect(() => {
-    console.log(auth.currentUser.uid)
+    console.log(auth?.currentUser?.uid)
   }, [auth])
 
     const insertToDB = async() => {

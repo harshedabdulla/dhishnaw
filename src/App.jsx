@@ -1,23 +1,13 @@
-import { BrowserRouter } from "react-router-dom"
+import { BrowserRouter, Routes, Route } from "react-router-dom"
 import Login from "./pages/Login"
 import Forms from "./pages/Forms"
+import Home from "./pages/Home"
 
 const App = () => {
   return (
    <BrowserRouter>
-      <div className="relative z-0 bg-primary">
-        <div className="bg-hero-pattern bg-cover bg-no-repeat bg-center">
-          <Navbar />
-          <Hero />
-          <Login />
-        </div>
-        <About />
-        <div className="relative z-0">
-          <Contact />
-          <StarsCanvas />
-        </div>
-      </div>
       <Routes>
+        <Route path='/' element={<Home />} />
         <Route path='/profile' />
         <Route path='/form' element={<Forms />} />
       </Routes>

@@ -28,18 +28,26 @@ const Forms = () => {
     };
 
     const handleSubmit = async(e) => {
+        e.preventDefault();
         try {
             const headers = {
                 headers: {
                     '_uid': auth.currentUser.uid
                 }
             }
-            const res = await axios.post('http://localhost:8081/insertUser', formData, headers)
-            
+            const formData2 = new FormData();
+            formData2.append('name', formData.name);
+            formData2.append('email', formData.email);
+            formData2.append('phone', formData.phone);
+            formData2.append('image', formData.photo);
+            const res = await axios.post('http://localhost:8081/insertUser', formData2, headers)
+            console.log(res)
+            if(res.data.success){
+                window.location.replace('/profile')
+            }
         } catch (error) {
             console.log(error)
         }
-        e.preventDefault();
         console.log(formData);
     };
 
