@@ -126,7 +126,12 @@ const About = () => {
         <h2 className={`${styles.sectionHeadText} text-center`}>Workshops</h2>
         {/*seach bar */}
         <div className='w-full flex flex-col items-center gap-4 mt-8 md:flex-row md:justify-center md:items-center'>
-          <input type='text' placeholder='Search' className='w-full md:w-[400px] h-[50px] rounded-[10px] border-none outline-none px-4 text-[16px] md:text-base font-medium' onChange={handleValue} />
+        <input
+    type='text'
+    placeholder='Search'
+    className='w-full md:w-[400px] h-[50px] rounded-[10px] border-none outline-none px-4 text-[16px] md:text-base font-medium mx-2' // Add mx-2 class here
+    onChange={handleValue}
+  />
           <button className='bg-[#FF884B] text-white text-[16px] md:text-base mt-2 md:mt-0 font-medium py-2 px-4 rounded-[10px] hover:bg-[#7d4fff] transition-all duration-200' onClick={handleSearch}>Search</button>
         </div>
       </motion.div>
