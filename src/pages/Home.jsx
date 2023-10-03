@@ -12,7 +12,6 @@ const Home = () => {
         <div className="bg-hero-pattern bg-cover bg-no-repeat bg-center">
           <Navbar />
           <Hero />
-          <Login />
         </div>
         <About />
         <div className="relative z-0">
