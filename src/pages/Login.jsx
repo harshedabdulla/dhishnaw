@@ -1,7 +1,6 @@
-import React,{useState} from 'react'
+import React from 'react'
 import { getAuth ,signInWithPopup, GoogleAuthProvider } from "firebase/auth"
 import { app } from '../firebase/config';
-import { github } from '../assets';
 
 
 const Login = () => {
