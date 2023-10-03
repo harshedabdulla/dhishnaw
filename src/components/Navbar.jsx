@@ -49,9 +49,10 @@ const Navbar = () => {
             onClick={() => {
               setToggle(!toggle);
               setActive(link.title);
+              document.getElementById(link.id).scrollIntoView({ behavior: 'smooth' });
               }}
             >
-              <a href={`#${link.id}`}>{link.title}</a>
+              {link.title}
             </li>
           ))}
         </ul>
