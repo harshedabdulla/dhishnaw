@@ -1,13 +1,16 @@
-import { BrowserRouter } from "react-router-dom"
-import Workshop from "./pages/Workshop"
+import { BrowserRouter, Routes, Route } from "react-router-dom"
+import Login from "./pages/Login"
 import Forms from "./pages/Forms"
+import Home from "./pages/Home"
 
 const App = () => {
   return (
    <BrowserRouter>
-   <Workshop />
-   <Forms />
-  
+      <Routes>
+        <Route path='/' element={<Home />} />
+        <Route path='/profile' />
+        <Route path='/form' element={<Forms />} />
+      </Routes>
     </BrowserRouter>
   )
 }
