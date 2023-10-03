@@ -9,6 +9,7 @@ const Workshop = () => {
                 <Hero />
             </div>
             <About />
+            <Feedbacks />
             <div className="relative z-0">
                 <Contact />
                 <StarsCanvas />

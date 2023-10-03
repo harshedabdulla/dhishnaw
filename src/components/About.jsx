@@ -52,7 +52,7 @@ const ServiceCard = ({ index, title, icon, details, price, register, onRegisterC
   return (
     <div className="md:w-[580px] sm:w-[480px] w-full">
       <div
-        className='w-full green-pink-gradient p-[1px] rounded-[20px] shadow-card'>
+        className='w-full orange-red-gradient p-[1px] rounded-[20px] shadow-card'>
         <div
           className='bg-tertiary rounded-[20px] py-6 px-4 md:px-12 min-h-[380px] flex flex-col justify-between items-center'>
           <div className="flex flex-col items-center">

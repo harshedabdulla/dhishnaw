@@ -197,31 +197,34 @@ import {
   ];
   
   const testimonials = [
-    {
-      testimonial:
-        "I thought it was impossible to make a website as beautiful as our product, but Rick proved me wrong.",
-      name: "Sara Lee",
-      designation: "CFO",
-      company: "Acme Co",
-      image: "https://randomuser.me/api/portraits/women/4.jpg",
-    },
-    {
-      testimonial:
-        "I've never met a web developer who truly cares about their clients' success like Rick does.",
-      name: "Chris Brown",
-      designation: "COO",
-      company: "DEF Corp",
-      image: "https://randomuser.me/api/portraits/men/5.jpg",
-    },
-    {
-      testimonial:
-        "After Rick optimized our website, our traffic increased by 50%. We can't thank them enough!",
-      name: "Lisa Wang",
-      designation: "CTO",
-      company: "456 Enterprises",
-      image: "https://randomuser.me/api/portraits/women/6.jpg",
-    },
-  ];
+  {
+    testimonial:
+      "Techfest Dhishna 2021 was an incredible experience. I was amazed by the innovative projects and workshops they offered.",
+    name: "John Smith",
+    designation: "Participant",
+    company: "Tech Enthusiast",
+    image: "https://randomuser.me/api/portraits/men/1.jpg",
+  },
+  {
+    testimonial:
+      "I had the privilege of attending Techfest Dhishna 2021, and it exceeded my expectations. The organizers did a fantastic job!",
+    name: "Emily Davis",
+    designation: "Attendee",
+    company: "Tech Blogger",
+    image: "https://randomuser.me/api/portraits/women/2.jpg",
+  },
+  {
+    testimonial:
+      "Techfest Dhishna 2021 was a game-changer for me. I learned so much and connected with brilliant minds in the industry.",
+    name: "Alex Johnson",
+    designation: "Workshop Participant",
+    company: "Software Developer",
+    image: "https://randomuser.me/api/portraits/men/3.jpg",
+  },
+];
+
+// You can use the modified testimonials data in your application.
+
   
   const projects = [
     {
