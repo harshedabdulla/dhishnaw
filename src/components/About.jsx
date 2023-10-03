@@ -37,7 +37,7 @@ const Popup = ({ index, title, icon, details, price, register, onRegisterClick }
             </div>
             <div className="flex justify-between items-center">
               <p className="text-gray-500 text-sm">{price}</p>
-              <button className="bg-[#915eff] text-white text-[16px] md:text-base mt-2 font-medium py-2 px-4 rounded-[10px] hover:bg-[#7d4fff] transition-all duration-200"
+              <button className="bg-[#FF884B] text-white text-[16px] md:text-base mt-2 font-medium py-2 px-4 rounded-[10px] hover:bg-[#FF783D] transition-all duration-200"
               >Register</button>
             </div>
           </div>
@@ -49,32 +49,31 @@ const Popup = ({ index, title, icon, details, price, register, onRegisterClick }
 
 
 const ServiceCard = ({ index, title, icon, details, price, register, onRegisterClick }) => {
+  const [clamp, setClamp] = useState(false);
   return (
-    <Tilt className="md:w-[580px] sm:w-[480px] w-full">
-      <motion.div
-        variants={fadeIn("right", "spring", 0.5 * index, 0.75)}
-        className='w-full green-pink-gradient p-[1px] rounded-[20px] shadow-card'>
-        <div options={{
-          max: 25,
-          scale: 1,
-          speed: 450,
-        }}
-          className='bg-tertiary rounded-[20px] py-6 px-4 md:px-12 min-h-[380px] flex flex-col justify-between items-center'>
+    <div className="md:w-[580px] px-4 sm:w-[480px] w-full">
+      <div
+        className='w-full orange-red-gradient p-[1px] rounded-[20px] shadow-card'>
+        <div
+          className='bg-tertiary rounded-[20px] py-6 px-4 md:px-12 h-auto flex flex-col justify-between items-center'>
           <div className="flex flex-col items-center">
             <img src={icon} alt={title} className='w-20 h-20 object-contain' />
             <h1 className='text-white text-lg md:text-xl font-bold text-center my-4'>{title}</h1>
-            <p className='text-white text-sm md:text-base font-medium text-center'>{details}</p>
+            <p className={` ${clamp ?"line-clamp-none" :"line-clamp-3 md:line-clamp-6"}  text-white text-sm md:text-base font-medium text-center my-4`} 
+            onClick={() => {
+                setClamp(!clamp);
+              }}>{details}</p>
           </div>
           <div className="flex justify-between w-full mt-4 md:mt-6">
-            <p className='text-white text-sm md:text-base font-medium text-center'>Price: <span className='text-[#915eff]'>{price}</span></p>
-            <button className='bg-[#915eff] text-white text-[16px] md:text-base mt-2 font-medium py-2 px-4 rounded-[10px] hover:bg-[#7d4fff] transition-all duration-200'
+            <p className='text-white text-sm md:text-base font-medium text-center'>Price: <span className='text-[#FF884B]'>{price}</span></p>
+            <button className='bg-[#FF884B] text-white text-[16px] md:text-base mt-2 font-medium py-2 px-4 rounded-[10px] hover:bg-[#FF783D] transition-all duration-200'
               onClick={() => {
                 onRegisterClick();
               }}>Register</button>
           </div>
         </div>
-      </motion.div>
-    </Tilt>
+      </div>
+    </div>
   )
 }
 const About = () => {
@@ -84,6 +83,19 @@ const About = () => {
 
   const handleValue = (e) => {
     setSearchTerm(e.target.value);
+    try {
+      if (searchTerm === null || searchTerm.trim() === '') {
+        setData(services);
+      } else {
+        const filteredData = services.filter((item) =>
+          item.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          item.details.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+        setData(filteredData);
+      }
+    } catch (error) {
+      console.error("An error occurred:", error);
+    }
   };
 
 
@@ -97,7 +109,6 @@ const About = () => {
           item.details.toLowerCase().includes(searchTerm.toLowerCase())
         );
         setData(filteredData);
-        console.log(filteredData, "filteredData");
       }
     } catch (error) {
       console.error("An error occurred:", error);
@@ -116,7 +127,7 @@ const About = () => {
         {/*seach bar */}
         <div className='w-full flex flex-col items-center gap-4 mt-8 md:flex-row md:justify-center md:items-center'>
           <input type='text' placeholder='Search' className='w-full md:w-[400px] h-[50px] rounded-[10px] border-none outline-none px-4 text-[16px] md:text-base font-medium' onChange={handleValue} />
-          <button className='bg-[#915eff] text-white text-[16px] md:text-base mt-2 md:mt-0 font-medium py-2 px-4 rounded-[10px] hover:bg-[#7d4fff] transition-all duration-200' onClick={handleSearch}>Search</button>
+          <button className='bg-[#FF884B] text-white text-[16px] md:text-base mt-2 md:mt-0 font-medium py-2 px-4 rounded-[10px] hover:bg-[#7d4fff] transition-all duration-200' onClick={handleSearch}>Search</button>
         </div>
       </motion.div>
       <div className='mt-8 md:mt-16 flex flex-wrap gap-4 md:gap-8 xl:gap-16 [&>img:not(:first-child)]:mt-5 lg:[&>img:not(:first-child)]:mt-8'>

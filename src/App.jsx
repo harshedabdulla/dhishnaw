@@ -1,6 +1,6 @@
 import { BrowserRouter } from "react-router-dom"
-import {About, Contact, Experience, Feedbacks, Hero, Navbar, Tech, Works, StarsCanvas} from "./components"
 import Login from "./pages/Login"
+import Forms from "./pages/Forms"
 
 const App = () => {
   return (
@@ -10,14 +10,17 @@ const App = () => {
           <Navbar />
           <Hero />
           <Login />
-          </div>
-          <About />
-          <div className="relative z-0">
-            <Contact />
-            <StarsCanvas />
-          </div>
-
         </div>
+        <About />
+        <div className="relative z-0">
+          <Contact />
+          <StarsCanvas />
+        </div>
+      </div>
+      <Routes>
+        <Route path='/profile' />
+        <Route path='/form' element={<Forms />} />
+      </Routes>
     </BrowserRouter>
   )
 }
