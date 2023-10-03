@@ -37,7 +37,7 @@ const Popup = ({ index, title, icon, details, price, register, onRegisterClick }
             </div>
             <div className="flex justify-between items-center">
               <p className="text-gray-500 text-sm">{price}</p>
-              <button className="bg-[#915eff] text-white text-[16px] md:text-base mt-2 font-medium py-2 px-4 rounded-[10px] hover:bg-[#7d4fff] transition-all duration-200"
+              <button className="bg-[#FF884B] text-white text-[16px] md:text-base mt-2 font-medium py-2 px-4 rounded-[10px] hover:bg-[#FF783D] transition-all duration-200"
               >Register</button>
             </div>
           </div>
@@ -61,8 +61,8 @@ const ServiceCard = ({ index, title, icon, details, price, register, onRegisterC
             <p className='text-white text-sm md:text-base font-medium text-center'>{details}</p>
           </div>
           <div className="flex justify-between w-full mt-4 md:mt-6">
-            <p className='text-white text-sm md:text-base font-medium text-center'>Price: <span className='text-[#915eff]'>{price}</span></p>
-            <button className='bg-[#915eff] text-white text-[16px] md:text-base mt-2 font-medium py-2 px-4 rounded-[10px] hover:bg-[#7d4fff] transition-all duration-200'
+            <p className='text-white text-sm md:text-base font-medium text-center'>Price: <span className='text-[#FF884B]'>{price}</span></p>
+            <button className='bg-[#FF884B] text-white text-[16px] md:text-base mt-2 font-medium py-2 px-4 rounded-[10px] hover:bg-[#FF783D] transition-all duration-200'
               onClick={() => {
                 onRegisterClick();
               }}>Register</button>
@@ -123,7 +123,7 @@ const About = () => {
         {/*seach bar */}
         <div className='w-full flex flex-col items-center gap-4 mt-8 md:flex-row md:justify-center md:items-center'>
           <input type='text' placeholder='Search' className='w-full md:w-[400px] h-[50px] rounded-[10px] border-none outline-none px-4 text-[16px] md:text-base font-medium' onChange={handleValue} />
-          <button className='bg-[#915eff] text-white text-[16px] md:text-base mt-2 md:mt-0 font-medium py-2 px-4 rounded-[10px] hover:bg-[#7d4fff] transition-all duration-200' onClick={handleSearch}>Search</button>
+          <button className='bg-[#FF884B] text-white text-[16px] md:text-base mt-2 md:mt-0 font-medium py-2 px-4 rounded-[10px] hover:bg-[#7d4fff] transition-all duration-200' onClick={handleSearch}>Search</button>
         </div>
       </motion.div>
       <div className='mt-8 md:mt-16 flex flex-wrap gap-4 md:gap-8 xl:gap-16 [&>img:not(:first-child)]:mt-5 lg:[&>img:not(:first-child)]:mt-8'>
