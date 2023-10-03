@@ -8,9 +8,13 @@ const Workshop = () => {
                 <Navbar />
                 <Hero />
             </div>
+            <section className="relative z-0" id="workshop">
             <About />
+            </section>
+            <section className="relative z-0" id="testimonials">
             <Feedbacks />
-            <div className="relative z-0">
+            </section>
+            <div className="relative z-0" id="contact">
                 <Contact />
                 <StarsCanvas />
             </div>

@@ -16,21 +16,23 @@ const Navbar = () => {
         {/* <p className="text-white text-[18px] font-bold cursor-pointer flex">Dhishna &nbsp;<span className="sm:block hidden">| Workshops</span></p> */}
         </Link> 
         <ul className='list-none hidden sm:flex flex-row gap-10'>
-          {navLinks.map((link)=>(
-            <li
-            key={link.id}
-            className={`${
-              active===link.title
-              ? "text-white"
-              : "text-secondary"
-            } hover:text-white text-[18px] font-medium cursor-pointer`}
-            onClick={() => {
-              setActive(link.title);
-              }}
-            >
-              <a href={`#${link.id}`}>{link.title}</a>
-            </li>
-          ))}
+        {navLinks.map((link) => (
+  <div
+    key={link.id} // Add a unique key prop here
+    className={`${
+      active === link.title
+        ? 'text-orange-500'
+        : 'text-white'
+    } hover:text-white text-[18px] font-medium cursor-pointer`}
+    onClick={() => {
+      setActive(link.title);
+      document.getElementById(link.id).scrollIntoView({ behavior: 'smooth' });
+    }}
+  >
+    {link.title}
+  </div>
+))}
+       
         </ul>
         <div className='sm:hidden flex flex-1 justify-end items-center'>
           <img src={toggle?close:menu} alt='menu' className='w-[28px] h-[28px] object-contain cursor-pointer' onClick={()=>setToggle(!toggle)} />

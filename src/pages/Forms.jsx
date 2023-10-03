@@ -3,14 +3,21 @@ import { auth } from '../firebase/config'
 import axios from 'axios';
 
 const Forms = () => {
-    console.log(Auth)
     const [formData, setFormData] = useState({
-        name: '',
-        email: '',
-        phoneNumber: '',
+        name: auth?.currentUser?.displayName || '',
+        email: auth?.currentUser?.email || '',
+        phoneNumber: auth?.currentUser?.phoneNumber ||'',
         photo: null,
-
     });
+
+    React.useEffect(() => {
+        setFormData({
+            name: auth?.currentUser?.displayName || '',
+            email: auth?.currentUser?.email || '',
+            phoneNumber: auth?.currentUser?.phoneNumber ||'',
+            photo: null,
+        })
+    }, [auth?.currentUser?.displayName, auth?.currentUser?.phoneNumber])
 
     const handleChange = (e) => {
         const { name, value, files } = e.target;
@@ -70,6 +77,7 @@ const Forms = () => {
                         />
                     </div>
                     <div className="mb-4">
+                        
                         <label htmlFor="photo" className="block text-white font-bold mb-2">
                             Photo:
                         </label>
