@@ -1,12 +1,10 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { styles } from '../style'
-import { Tilt } from 'react-tilt'
-// import { services } from '../constants'
-import { fadeIn, textVariant } from '../utils/motion'
 import { SectionWrapper } from '../hoc'
 import { auth } from '../firebase/config'
 import axios from 'axios'
+  
 import sanityClient from '../client'
 import { useEffect } from 'react'
 import imageUrlBuilder from '@sanity/image-url'
@@ -36,18 +34,14 @@ const Popup = ({ index, title, event_type, event_code, event_pay_type, icon, det
   }
   return (
     <div>
-      <div className="fixed inset-0 bg-black opacity-50"></div>
+      <div className="fixed inset-0 bg-black opacity-50 "></div>
       <div className="fixed inset-0 flex items-center justify-center z-50">
         <div
-          className="bg-white rounded-lg overflow-hidden shadow-lg relative z-10 w-full md:w-1/2 lg:w-1/3">
+          className="bg-white rounded-lg overflow-hidden shadow-lg relative z-10 w-full mx-4 md:mx-0 md:w-1/2 lg:w-1/3">
           <div className="p-6">
             <div className="flex justify-between items-center">
               <h2 className="text-xl md:text-2xl text-black font-semibold mb-4">{title}</h2>
-              <button className="text-black text-2xl hover:text-gray-400 transition-all duration-200"
-                onClick={() => {
-                  setSelectedId(null);
-                }
-                }>
+              <button className="text-black text-2xl hover:text-gray-400 transition-all duration-200">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none"
                   viewBox="0 0 24 24" stroke="currentColor"
                   onClick={() => {
@@ -88,7 +82,9 @@ const ServiceCard = ({ index, title, icon, details, price, register, onRegisterC
             <p className={` ${clamp ? "line-clamp-none" : "line-clamp-3 md:line-clamp-6"}  text-white text-sm md:text-base font-medium text-center my-4`}
               onClick={() => {
                 setClamp(!clamp);
-              }}>{details}</p>
+              }}>
+                {details}
+                </p>
           </div>
           <div className="flex justify-between w-full mt-4 md:mt-6">
             <p className='text-white text-sm md:text-base font-medium text-center'>Price: <span className='text-[#FF884B]'>{price}</span></p>
@@ -176,7 +172,7 @@ const About = () => {
       <motion.div>
         <h2 className={`${styles.sectionHeadText} text-center`}>Workshops</h2>
         {/*seach bar */}
-        <div className='w-full flex flex-col items-center gap-4 mt-8 md:flex-row md:justify-center md:items-center'>
+        <div className='w-full flex flex-col items-center gap-4 mt-8 md:flex-row md:justify-center md:items-center px-8'>
           <input
             type='text'
             placeholder='Search'
@@ -186,7 +182,7 @@ const About = () => {
           <button className='bg-[#FF884B] text-white text-[16px] md:text-base mt-2 md:mt-0 font-medium py-2 px-4 rounded-[10px] hover:bg-[#FF783D] transition-all duration-200' onClick={handleSearch}>Search</button>
         </div>
       </motion.div>
-      <div className='mt-8 md:mt-16 flex flex-wrap gap-4 md:gap-8 xl:gap-16 [&>img:not(:first-child)]:mt-5 lg:[&>img:not(:first-child)]:mt-8'>
+      <div className='mt-8 md:mt-16 flex flex-wrap gap-4 md:gap-8 xl:gap-16 justify-center'>
         {data.map((service, index) => (
           <ServiceCard key={service.title} index={index} {...service}
             onRegisterClick={() => handleRegisterClick(service.title)}

@@ -3,7 +3,6 @@ import { motion } from "framer-motion";
 import emailjs from "@emailjs/browser";
 
 import { styles } from "../style";
-import { EarthCanvas } from "./canvas";
 import { SectionWrapper } from "../hoc";
 import { slideIn } from "../utils/motion";
 
@@ -66,7 +65,7 @@ const Contact = () => {
 
   return (
     <div
-      className={`xl:mt-12 max-w-6xl flex justify-center items-center flex-col xl:flex-row gap-12`}
+      className={`mt-12 max-w-6xl flex justify-center items-center flex-col xl:flex-row gap-12`}
     >
       <motion.div
         variants={slideIn("left", "tween", 0.2, 1)}
