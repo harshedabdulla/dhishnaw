@@ -2,6 +2,9 @@ import { BrowserRouter, Routes, Route } from "react-router-dom"
 import Forms from "./pages/Forms"
 import Home from "./pages/Home"
 import Profile from "./pages/Profile"
+import { auth } from './firebase/config'
+import { useState } from "react"
+import { useEffect } from "react"
 
 const App = () => {
   return (
