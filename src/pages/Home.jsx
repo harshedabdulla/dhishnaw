@@ -5,12 +5,13 @@ import Login from './Login'
 import Contact from '../components/Contact'
 import StarsCanvas from '../components/canvas/Stars'
 import About from '../components/About'
+import { navLinks } from '../constants'
 
 const Home = () => {
   return (
     <div className="relative z-0 bg-primary">
         <div className="bg-hero-pattern bg-cover bg-no-repeat bg-center">
-          <Navbar />
+          <Navbar id={navLinks} />
           <Hero />
         </div>
         <About />
