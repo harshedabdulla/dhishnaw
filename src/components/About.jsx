@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { styles } from '../style'
 import { Tilt } from 'react-tilt'
-import { services } from '../constants'
+// import { services } from '../constants'
 import { fadeIn, textVariant } from '../utils/motion'
 import { SectionWrapper } from '../hoc'
 import { auth } from '../firebase/config'
@@ -13,7 +13,7 @@ import imageUrlBuilder from '@sanity/image-url'
 
 
 const Popup = ({ index, title, event_type, event_code, event_pay_type, icon, details, price, register, onRegisterClick }) => {
-  const handleRegister = async(event_type, event_pay_type, event_code, phone_no) => {
+  const handleRegister = async (event_type, event_pay_type, event_code, phone_no) => {
     try {
       const formData = new FormData();
       formData.append('name', auth?.currentUser?.displayName);
@@ -73,7 +73,7 @@ const Popup = ({ index, title, event_type, event_code, event_pay_type, icon, det
 };
 
 
-const ServiceCard = ({ index, title, icon, details, price, register, onRegisterClick,urlFor }) => {
+const ServiceCard = ({ index, title, icon, details, price, register, onRegisterClick, urlFor }) => {
   const [clamp, setClamp] = useState(false);
   return (
     <div className="md:w-[580px] px-4 sm:w-[480px] w-full">
@@ -84,8 +84,8 @@ const ServiceCard = ({ index, title, icon, details, price, register, onRegisterC
           <div className="flex flex-col items-center">
             <img src={urlFor(icon)} alt={title} className='w-20 h-20 object-contain' />
             <h1 className='text-white text-lg md:text-xl font-bold text-center my-4'>{title}</h1>
-            <p className={` ${clamp ?"line-clamp-none" :"line-clamp-3 md:line-clamp-6"}  text-white text-sm md:text-base font-medium text-center my-4`} 
-            onClick={() => {
+            <p className={` ${clamp ? "line-clamp-none" : "line-clamp-3 md:line-clamp-6"}  text-white text-sm md:text-base font-medium text-center my-4`}
+              onClick={() => {
                 setClamp(!clamp);
               }}>{details}</p>
           </div>
@@ -102,16 +102,17 @@ const ServiceCard = ({ index, title, icon, details, price, register, onRegisterC
   )
 }
 const About = () => {
+  const [services, setServices] = useState([]);
   const [data, setData] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedId, setSelectedId] = useState(null);
 
   const builder = imageUrlBuilder(sanityClient)
 
-function urlFor(source) {
-  return builder.image(source)
-}
-  
+  function urlFor(source) {
+    return builder.image(source)
+  }
+
 
   useEffect(() => {
     sanityClient.fetch(`*[_type == "events"]{
@@ -124,19 +125,21 @@ function urlFor(source) {
       price,
       register
     }`).then((data) => {
+      setServices(data)
       setData(data)
     }).catch(console.error)
   }, [])
 
   const handleValue = (e) => {
     setSearchTerm(e.target.value);
+    const Term = e.target.value;
     try {
-      if (searchTerm === null || searchTerm.trim() === '') {
+      if (Term === null || Term.trim() === '') {
         setData(services);
       } else {
         const filteredData = services.filter((item) =>
-          item.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          item.details.toLowerCase().includes(searchTerm.toLowerCase())
+          item.title.toLowerCase().includes(Term.toLowerCase()) ||
+          item.details.toLowerCase().includes(Term.toLowerCase())
         );
         setData(filteredData);
       }
@@ -173,12 +176,12 @@ function urlFor(source) {
         <h2 className={`${styles.sectionHeadText} text-center`}>Workshops</h2>
         {/*seach bar */}
         <div className='w-full flex flex-col items-center gap-4 mt-8 md:flex-row md:justify-center md:items-center'>
-        <input
-    type='text'
-    placeholder='Search'
-    className='w-full md:w-[400px] h-[50px] rounded-[10px] border-none outline-none px-4 text-[16px] md:text-base font-medium mx-2' // Add mx-2 class here
-    onChange={handleValue}
-  />
+          <input
+            type='text'
+            placeholder='Search'
+            className='w-full md:w-[400px] h-[50px] rounded-[10px] border-none outline-none px-4 text-[16px] md:text-base font-medium mx-2' // Add mx-2 class here
+            onChange={handleValue}
+          />
           <button className='bg-[#FF884B] text-white text-[16px] md:text-base mt-2 md:mt-0 font-medium py-2 px-4 rounded-[10px] hover:bg-[#FF783D] transition-all duration-200' onClick={handleSearch}>Search</button>
         </div>
       </motion.div>
