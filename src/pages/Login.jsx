@@ -18,14 +18,16 @@ const Login = () => {
   }, [])
 
 
+
   const insertToDB = async () => {
     try {
       const headers = {
         headers: {
-          'folder_name': auth.currentUser.uid
+          'folder_name': auth.currentUser.uid,
+          'Authorization': auth.currentUser.accessToken
         }
       }
-      const res = await axios.post('http://localhost:8081/create_folder', {}, headers)
+      const res = await axios.post('https://neol7a57w4hxyq6iscz77r3uri0zeali.lambda-url.us-east-1.on.aws/create_folder', {}, headers)
       if (res.data.new == 1) {
         window.location.replace('/profile')
       } else if (res.data.new == 0) {

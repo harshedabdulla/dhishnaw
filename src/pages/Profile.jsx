@@ -4,6 +4,10 @@ import { navLinks } from '../constants'
 import { styles } from '../style'
 import { StarsCanvas } from '../components/canvas'
 import { Tilt } from 'react-tilt'
+import { useStateContext } from '../context/stateContext'
+import { onAuthStateChanged } from 'firebase/auth'
+import { app, auth } from '../firebase/config';
+
 
 
 
@@ -34,7 +38,17 @@ const Profile = () => {
     email: 'johndoe@example.com',
     phone: '+1 (123) 456-7890',
   };
+  const {fetchUserDetails} = useStateContext()
 
+  React.useEffect(() => {
+    auth.onAuthStateChanged((user) => {
+        if (user) {
+          console.log(user)
+          fetchUserDetails()
+        }
+    }
+    )
+}, [])
   return (
     <div>
       <Navbar id={id}/>

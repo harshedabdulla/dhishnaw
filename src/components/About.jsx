@@ -24,10 +24,11 @@ const Popup = ({ index, title, event_type, event_code, event_pay_type, icon, det
       console.log(event_code)
       const headers = {
         headers: {
-          '_uid': auth.currentUser.uid
+          '_uid': auth.currentUser.uid,
+          'Authorization': auth.currentUser.accessToken
         }
       }
-      const res = await axios.post('http://localhost:8081/add_registration_data', formData, headers)
+      const res = await axios.post('https://neol7a57w4hxyq6iscz77r3uri0zeali.lambda-url.us-east-1.on.aws/add_registration_data', formData, headers)
       console.log(res)
     } catch (error) {
       console.log(error)
