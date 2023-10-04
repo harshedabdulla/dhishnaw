@@ -1,10 +1,11 @@
-import React from 'react'
+import React ,{useEffect} from 'react'
 import Navbar from '../components/Navbar'
 import { navLinks } from '../constants'
 import { styles } from '../style'
 import { StarsCanvas } from '../components/canvas'
 import { Tilt } from 'react-tilt'
 import { SocialIcon } from 'react-social-icons'
+import { auth } from '../firebase/config'
 
 
 const Profile = () => {
@@ -46,6 +47,14 @@ const Profile = () => {
       boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)', // Shadow
     },
   };
+
+    useEffect(() => {
+        auth.onAuthStateChanged((user) => {
+            if (!user) {
+                window.location.href = '/'
+            }
+        })
+    }, [])
 
 
   // Function to handle sharing on Facebook
