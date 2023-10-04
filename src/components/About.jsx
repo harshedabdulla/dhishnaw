@@ -5,9 +5,31 @@ import { Tilt } from 'react-tilt'
 import { services } from '../constants'
 import { fadeIn, textVariant } from '../utils/motion'
 import { SectionWrapper } from '../hoc'
+import { auth } from '../firebase/config'
+import axios from 'axios'
 
 
-const Popup = ({ index, title, icon, details, price, register, onRegisterClick }) => {
+const Popup = ({ index, title, event_type, event_code, event_pay_type, icon, details, price, register, onRegisterClick }) => {
+  const handleRegister = async(event_type, event_pay_type, event_code, phone_no) => {
+    try {
+      const formData = new FormData();
+      formData.append('name', auth?.currentUser?.displayName);
+      formData.append('phone_no', phone_no);
+      formData.append('event_pay_type', event_pay_type);
+      formData.append('event_type', event_type);
+      formData.append('event_code', event_code);
+      console.log(event_code)
+      const headers = {
+        headers: {
+          '_uid': auth.currentUser.uid
+        }
+      }
+      const res = await axios.post('http://localhost:8081/add_registration_data', formData, headers)
+      console.log(res)
+    } catch (error) {
+      console.log(error)
+    }
+  }
   return (
     <div>
       <div className="fixed inset-0 bg-black opacity-50"></div>
@@ -37,7 +59,7 @@ const Popup = ({ index, title, icon, details, price, register, onRegisterClick }
             </div>
             <div className="flex justify-between items-center">
               <p className="text-gray-500 text-sm">{price}</p>
-              <button className="bg-[#FF884B] text-white text-[16px] md:text-base mt-2 font-medium py-2 px-4 rounded-[10px] hover:bg-[#FF783D] transition-all duration-200"
+              <button onClick={() => handleRegister(event_type, event_pay_type, event_code, "9778393558")} className="bg-[#FF884B] text-white text-[16px] md:text-base mt-2 font-medium py-2 px-4 rounded-[10px] hover:bg-[#FF783D] transition-all duration-200"
               >Register</button>
             </div>
           </div>

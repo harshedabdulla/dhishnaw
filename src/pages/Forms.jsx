@@ -38,7 +38,7 @@ const Forms = () => {
             const formData2 = new FormData();
             formData2.append('name', formData.name);
             formData2.append('email', formData.email);
-            formData2.append('phone', formData.phone);
+            formData2.append('phone', formData.phoneNumber);
             formData2.append('image', formData.photo);
             const res = await axios.post('http://localhost:8081/insertUser', formData2, headers)
             console.log(res)
@@ -96,6 +96,7 @@ const Forms = () => {
                             accept="image/*"
                             onChange={handleChange}
                             className="bg-tertiary appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            required
                         />
                     </div>
                     <div className="mb-6">
