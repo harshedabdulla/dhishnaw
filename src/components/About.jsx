@@ -84,7 +84,6 @@ const ServiceCard = ({ index, title, icon, details, price, register, onRegisterC
               }}>
                 {details}
                 </p>
-              {!clamp && <p className='text-white text-sm md:text-base font-medium text-center my-4'>more</p>}
           </div>
           <div className="flex justify-between w-full mt-4 md:mt-6">
             <p className='text-white text-sm md:text-base font-medium text-center'>Price: <span className='text-[#FF884B]'>{price}</span></p>
