@@ -1,14 +1,15 @@
-import React, { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { styles } from '../style'
 import { navLinks } from '../constants'
-import { logo, menu, close } from '../assets'
+import {  menu, close } from '../assets'
 import logo2 from '../assets/logo2.png'
 import Login from '../pages/Login'
 
 const Navbar = () => {
   const [active, setActive] = useState("");
   const [toggle, setToggle] = useState(false);
+  console.log(active)
   return (
     <nav className={`${styles.paddingX} w-full items-center py-5 fixed top-0 z-20 bg-primary`}>
       <div className='w-full flex justify-between items-center max-w-7xl mx-auto'>
@@ -26,10 +27,12 @@ const Navbar = () => {
                 } hover:text-white text-[18px] flex items-center  font-medium cursor-pointer`}
               onClick={() => {
                 setActive(link.title);
-                document.getElementById(link.id).scrollIntoView({ behavior: 'smooth' });
+                document.getElementById(link.id).scrollIntoView();
               }}
             >
-              {link.title}
+              <a href = {`#${link.id}`}>
+                {link.title}
+              </a>
             </div>
           ))}
           <Login />

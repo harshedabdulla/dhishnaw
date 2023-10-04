@@ -12,7 +12,7 @@ const Workshop = () => {
             <About />
             <StarsCanvas />
             </section>
-            <section className="relative z-0" id="testimonials">
+            <section className="relative z-0" id="#testimonials">
             <Feedbacks />
             <StarsCanvas />
             </section>

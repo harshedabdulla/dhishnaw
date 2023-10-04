@@ -14,14 +14,6 @@ const Login = () => {
         headers: {
           'folder_name': auth.currentUser.uid
         }
-        const res = await axios.post('http://localhost:8081/create_folder', {}, headers)
-        if(res.data.new == 1){
-          window.location.replace('/form')
-        }else if(res.data.new == 0){
-          window.location.replace('/profile')
-        }
-      } catch (error) {
-        console.log(error)
       }
       const res = await axios.post('http://localhost:8081/create_folder', {}, headers)
       if (res.data.new == 1) {
