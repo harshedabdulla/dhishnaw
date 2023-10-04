@@ -4,7 +4,7 @@ import { navLinks } from '../constants'
 import { styles } from '../style'
 import { StarsCanvas } from '../components/canvas'
 import { Tilt } from 'react-tilt'
-
+import { SocialIcon } from 'react-social-icons'
 
 
 const Profile = () => {
@@ -34,6 +34,43 @@ const Profile = () => {
     email: 'johndoe@example.com',
     phone: '+1 (123) 456-7890',
   };
+  const badgeInfo = {
+    eventName: 'Dhishna 2023',
+    badgeText: 'Excited to be a part of Dhishna 2023!',
+    badgeImage: 'url_to_badge_image.jpg', // Replace with the URL to the event badge image
+    badgeStyle: {
+      backgroundColor: '#FF884B', // Background color
+      color: '#ffffff', // Text color
+      borderRadius: '8px', // Rounded corners
+      padding: '12px', // Spacing inside the badge
+      boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)', // Shadow
+    },
+  };
+  
+
+   // Function to handle sharing on Facebook
+   const shareOnFacebook = () => {
+    const url = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
+      badgeInfo.badgeImage
+    )}&quote=${encodeURIComponent(badgeInfo.badgeText)}`;
+    window.open(url, '_blank', 'width=600,height=400');
+  };
+
+  // Function to handle sharing on Twitter
+  const shareOnTwitter = () => {
+    const url = `https://twitter.com/intent/tweet?url=${encodeURIComponent(
+      badgeInfo.badgeImage
+    )}&text=${encodeURIComponent(badgeInfo.badgeText)}`;
+    window.open(url, '_blank', 'width=600,height=400');
+  };
+
+  // Function to handle sharing on LinkedIn
+  const shareOnLinkedIn = () => {
+    const url = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(
+      badgeInfo.badgeImage
+    )}&title=${encodeURIComponent(badgeInfo.badgeText)}`;
+    window.open(url, '_blank', 'width=600,height=400');
+  };
 
   return (
     <div>
@@ -47,6 +84,29 @@ const Profile = () => {
         </div>
         <div>
           <h1 className={`${styles.heroHeadText}`}>Your <span className='text-[#FF884B]'>Profile</span></h1>
+          <div className='my-4'>
+          {/* Social Sharing Buttons */}
+          <button
+            onClick={shareOnFacebook}
+            className='bg-orange-600 text-white px-1 py-1 rounded-xl mr-2 hover:bg-orange-800'
+          >
+            {/** Facebook icon */}
+            <SocialIcon network="facebook" />
+          </button>
+          <button
+            onClick={shareOnTwitter}
+            className='bg-orange-400 text-white px-1 py-1 rounded-xl mr-2 hover:bg-orange-600'
+          >
+            <SocialIcon network="twitter" />
+          </button>
+          <button
+            onClick={shareOnLinkedIn}
+            className='bg-orange-600 text-white px-1 py-1 rounded-xl hover:bg-orange-900'
+          >
+            <SocialIcon network="linkedin" />
+          </button>
+        </div>
+
           </div>
           <section className={`${styles.paddingX} mt-10 mx-auto max-w-2xl`}>
         {/* User Profile */}
@@ -64,11 +124,11 @@ const Profile = () => {
         <img
           src="url_to_user_image.jpg" // Replace with the URL to the user's image
           alt="User Profile"
-          className="w-16 h-16 object-cover rounded-full border-4 border-white shadow-md"
+          className="w-16 h-16 object-cover rounded-full border-2 border-white shadow-lg"
         />
         {/* Add a circular user image */}
       </div>
-      <p className="text-white">{userProfile.username}</p>
+      <p className="text-white my-4">{userProfile.username}</p>
     </div>
     <div className="mb-4 text-center">
       <p className="text-white">{userProfile.email}</p>
@@ -85,7 +145,7 @@ const Profile = () => {
             {registeredEvents.map((event) => (
               <div
                 key={event.id}
-                className="bg-tertiary shadow-md p-6 rounded-md"
+                className="bg-tertiary shadow-md p-6 rounded-lg"
               >
                 <h2 className="text-lg font-semibold mb-2">
                   {event.eventName}

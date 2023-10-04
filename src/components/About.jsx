@@ -7,7 +7,7 @@ import { fadeIn, textVariant } from '../utils/motion'
 import { SectionWrapper } from '../hoc'
 import { auth } from '../firebase/config'
 import axios from 'axios'
-
+  
 
 const Popup = ({ index, title, event_type, event_code, event_pay_type, icon, details, price, register, onRegisterClick }) => {
   const handleRegister = async(event_type, event_pay_type, event_code, phone_no) => {
