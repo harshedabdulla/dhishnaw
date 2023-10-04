@@ -7,6 +7,9 @@ import { fadeIn, textVariant } from '../utils/motion'
 import { SectionWrapper } from '../hoc'
 import { auth } from '../firebase/config'
 import axios from 'axios'
+import sanityClient from '../client'
+import { useEffect } from 'react'
+import imageUrlBuilder from '@sanity/image-url'
 
 
 const Popup = ({ index, title, event_type, event_code, event_pay_type, icon, details, price, register, onRegisterClick }) => {
@@ -70,7 +73,7 @@ const Popup = ({ index, title, event_type, event_code, event_pay_type, icon, det
 };
 
 
-const ServiceCard = ({ index, title, icon, details, price, register, onRegisterClick }) => {
+const ServiceCard = ({ index, title, icon, details, price, register, onRegisterClick,urlFor }) => {
   const [clamp, setClamp] = useState(false);
   return (
     <div className="md:w-[580px] px-4 sm:w-[480px] w-full">
@@ -79,7 +82,7 @@ const ServiceCard = ({ index, title, icon, details, price, register, onRegisterC
         <div
           className='bg-tertiary rounded-[20px] py-6 px-4 md:px-12 h-auto flex flex-col justify-between items-center'>
           <div className="flex flex-col items-center">
-            <img src={icon} alt={title} className='w-20 h-20 object-contain' />
+            <img src={urlFor(icon)} alt={title} className='w-20 h-20 object-contain' />
             <h1 className='text-white text-lg md:text-xl font-bold text-center my-4'>{title}</h1>
             <p className={` ${clamp ?"line-clamp-none" :"line-clamp-3 md:line-clamp-6"}  text-white text-sm md:text-base font-medium text-center my-4`} 
             onClick={() => {
@@ -99,9 +102,31 @@ const ServiceCard = ({ index, title, icon, details, price, register, onRegisterC
   )
 }
 const About = () => {
-  const [data, setData] = useState(services);
+  const [data, setData] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
-  const [selectedId, setSelectedId] = useState(null)
+  const [selectedId, setSelectedId] = useState(null);
+
+  const builder = imageUrlBuilder(sanityClient)
+
+function urlFor(source) {
+  return builder.image(source)
+}
+  
+
+  useEffect(() => {
+    sanityClient.fetch(`*[_type == "events"]{
+      title,
+      event_type,
+      event_code,
+      event_pay_type,
+      icon,
+      details,
+      price,
+      register
+    }`).then((data) => {
+      setData(data)
+    }).catch(console.error)
+  }, [])
 
   const handleValue = (e) => {
     setSearchTerm(e.target.value);
@@ -161,6 +186,7 @@ const About = () => {
         {data.map((service, index) => (
           <ServiceCard key={service.title} index={index} {...service}
             onRegisterClick={() => handleRegisterClick(service.title)}
+            urlFor={urlFor}
           />
         ))}
         {selectedId &&
