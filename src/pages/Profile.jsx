@@ -76,10 +76,10 @@ const Profile = () => {
     <div>
       <Navbar id={id}/>
       <section
-    className='relative w-full h-[440px] mx-auto'>
+    className='relative w-full h-auto mx-auto'>
       <div className={`${styles.paddingX} absolute inset-0 top-[120px] max-w-7xl mx-auto flex flex-row items-start gap-5`}>
         <div className='flex flex-col justify-center items-center mt-5'>
-          <div className='w-5 h-5 rounded-full bg-[#FF884B]' />
+          <div className='w-5 h-5 sm:h-80 rounded-full bg-[#FF884B]' />
           <div className='w-1 sm:h-80 h-40 violent-gradient' />
         </div>
         <div>
@@ -111,11 +111,11 @@ const Profile = () => {
           <section className={`${styles.paddingX} mt-10 mx-auto max-w-2xl`}>
         {/* User Profile */}
         <Tilt // Wrap the profile card in Tilt component
-  className="Tilt"
+  className="Tilt w-full sm:w-auto"
   options={{ max: 25, scale: 1.1 }} // Tilt options
 >
-  <div className="bg-tertiary orange-red-gradient shadow-md p-6 rounded-xl">
-    <div className="flex justify-between items-center mb-4 mx-4">
+  <div className="bg-tertiary orange-red-gradient shadow-md p-6 rounded-xl sm:text-left">
+    <div className="flex justify-center sm:justify-between items-center mb-4 mx-4">
       <h1 className="text-3xl font-bold mb-4">Dhishna 2023</h1>
       <h2 className="text-xl font-medium mb-4">#45678</h2>
     </div>
