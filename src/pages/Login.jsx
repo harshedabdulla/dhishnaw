@@ -7,6 +7,16 @@ import axios from 'axios'
 const Login = () => {
   const [user, setUser] = React.useState(false);
 
+  React.useEffect(() => {
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        setUser(true)
+      } else {
+        setUser(false)
+      }
+    })
+  }, [])
+
 
   const insertToDB = async () => {
     try {
@@ -48,7 +58,7 @@ const Login = () => {
   return (
     <div>
       <div className='mx-auto'>
-        {auth.currentUser || user ? (
+        { user ? (
         <img src={auth.currentUser.photoURL} alt='profilephoto' className='h-9 w-9 rounded-full'/>
         ) : (
         <button className='bg-[#FF884B] hover:bg-[#FF783D] text-white font-semibold rounded-sm w-28 py-2 px-4' onClick={handleSigninWithGoogle}>

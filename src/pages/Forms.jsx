@@ -6,18 +6,31 @@ const Forms = () => {
     const [formData, setFormData] = useState({
         name: auth?.currentUser?.displayName || '',
         email: auth?.currentUser?.email || '',
-        phoneNumber: auth?.currentUser?.phoneNumber ||'',
+        phoneNumber: auth?.currentUser?.phoneNumber || '',
         photo: null,
     });
 
+
     React.useEffect(() => {
-        setFormData({
-            name: auth?.currentUser?.displayName || '',
-            email: auth?.currentUser?.email || '',
-            phoneNumber: auth?.currentUser?.phoneNumber ||'',
-            photo: null,
-        })
-    }, [auth?.currentUser?.displayName, auth?.currentUser?.phoneNumber])
+        auth.onAuthStateChanged((user) => {
+            if (user) {
+                setFormData({
+                    name: auth?.currentUser?.displayName || '',
+                    email: auth?.currentUser?.email || '',
+                    phoneNumber: auth?.currentUser?.phoneNumber || '',
+                    photo: null,
+                })
+            } else {
+                setFormData({
+                    name: '',
+                    email: '',
+                    phoneNumber: '',
+                    photo: null,
+                })
+            }
+        }
+        )
+    }, [])
 
     const handleChange = (e) => {
         const { name, value, files } = e.target;
@@ -27,7 +40,7 @@ const Forms = () => {
         }));
     };
 
-    const handleSubmit = async(e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         try {
             const headers = {
@@ -42,7 +55,7 @@ const Forms = () => {
             formData2.append('image', formData.photo);
             const res = await axios.post('http://localhost:8081/insertUser', formData2, headers)
             console.log(res)
-            if(res.data.success){
+            if (res.data.success) {
                 window.location.replace('/profile')
             }
         } catch (error) {
@@ -85,7 +98,7 @@ const Forms = () => {
                         />
                     </div>
                     <div className="mb-4">
-                        
+
                         <label htmlFor="photo" className="block text-white font-bold mb-2">
                             Photo:
                         </label>
