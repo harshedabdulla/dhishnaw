@@ -1,12 +1,12 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { styles } from '../style'
-import { navLinks } from '../constants'
+// import { navLinks } from '../constants'
 import {  menu, close } from '../assets'
 import logo2 from '../assets/logo2.png'
 import Login from '../pages/Login'
 
-const Navbar = () => {
+const Navbar = ({id}) => {
   const [active, setActive] = useState("");
   const [toggle, setToggle] = useState(false);
   console.log(active)
@@ -18,7 +18,7 @@ const Navbar = () => {
           {/* <p className="text-white text-[18px] font-bold cursor-pointer flex">Dhishna &nbsp;<span className="sm:block hidden">| Workshops</span></p> */}
         </Link>
         <ul className='list-none hidden md:flex flex-row gap-10'>
-          {navLinks.map((link) => (
+          {id && id.map((link) => (
             <div
               key={link.id} // Add a unique key prop here
               className={`${active === link.title
@@ -42,7 +42,7 @@ const Navbar = () => {
           <img src={toggle ? close : menu} alt='menu' className='w-[28px] h-[28px] object-contain cursor-pointer' onClick={() => setToggle(!toggle)} />
           <div className={`${!toggle ? "hidden" : "flex"} p-6 black-gradient absolute top-20 right-0 mc-4 my-2 min-w-[140px] z-10 rounded-xl`}>
             <ul className='list-none flex justify-end items-start flex-col gap-4'>
-              {navLinks.map((link) => (
+              {id && id.map((link) => (
                 <li
                   key={link.id}
                   className={`${active === link.title

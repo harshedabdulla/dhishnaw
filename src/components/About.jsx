@@ -154,7 +154,7 @@ const About = () => {
     className='w-full md:w-[400px] h-[50px] rounded-[10px] border-none outline-none px-4 text-[16px] md:text-base font-medium mx-2' // Add mx-2 class here
     onChange={handleValue}
   />
-          <button className='bg-[#FF884B] text-white text-[16px] md:text-base mt-2 md:mt-0 font-medium py-2 px-4 rounded-[10px] hover:bg-[#7d4fff] transition-all duration-200' onClick={handleSearch}>Search</button>
+          <button className='bg-[#FF884B] text-white text-[16px] md:text-base mt-2 md:mt-0 font-medium py-2 px-4 rounded-[10px] hover:bg-[#FF783D] transition-all duration-200' onClick={handleSearch}>Search</button>
         </div>
       </motion.div>
       <div className='mt-8 md:mt-16 flex flex-wrap gap-4 md:gap-8 xl:gap-16 [&>img:not(:first-child)]:mt-5 lg:[&>img:not(:first-child)]:mt-8'>
