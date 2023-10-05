@@ -10,7 +10,7 @@ import { useEffect } from 'react'
 import imageUrlBuilder from '@sanity/image-url'
 
 
-const Popup = ({ index, title, event_type, event_code, event_pay_type, icon, details, price, register, onRegisterClick }) => {
+const Popup = ({ index, title, event_type, uniquecode, event_code, event_pay_type, icon, details, price, register, onRegisterClick }) => {
   const handleRegister = async (event_type, event_pay_type, event_code, phone_no) => {
     try {
       const formData = new FormData();

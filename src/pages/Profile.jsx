@@ -12,6 +12,7 @@ import { SocialIcon } from 'react-social-icons'
 
 
 const Profile = () => {
+  const {userDetails} = useStateContext()
   const id = [{
     id: "/Profile",
     title: "Profile",
@@ -131,21 +132,21 @@ const Profile = () => {
               <div className="bg-tertiary orange-red-gradient shadow-md p-6 rounded-xl sm:text-left">
                 <div className="flex justify-center sm:justify-between items-center mb-4 mx-4">
                   <h1 className="text-3xl font-bold mb-4">Dhishna 2023</h1>
-                  <h2 className="text-xl font-medium mb-4">#45678</h2>
+                  {auth?.currentUser && <h2 className="text-xl font-medium mb-4">#{auth.currentUser.uid.substring(auth.currentUser.uid.length - 5)}</h2>}
                 </div>
                 <div className="mb-4 text-center">
                   <div className="relative inline-block">
-                    <img
-                      src="url_to_user_image.jpg" // Replace with the URL to the user's image
+                    {auth?.currentUser?.photoURL && <img
+                      src={`data:image/jpeg;base64,${userDetails.profileimg ||auth.currentUser.photoURL}`}
                       alt="User Profile"
                       className="w-16 h-16 object-cover rounded-full border-2 border-white shadow-lg"
-                    />
+                    />}
                     {/* Add a circular user image */}
                   </div>
-                  <p className="text-white my-4">{userProfile.username}</p>
+                  <p className="text-white my-4">{userDetails.name}</p>
                 </div>
                 <div className="mb-4 text-center">
-                  <p className="text-white">{userProfile.email}</p>
+                  <p className="text-white">{userDetails.email}</p>
                 </div>
 
               </div>
