@@ -37,13 +37,12 @@ const Popup = ({ index, title, event_type, uniquecode, event_code, event_pay_typ
   }
   return (
     <div>
-      <div className="fixed inset-0 bg-black opacity-50 "></div>
-      <div className="fixed inset-0 flex items-center justify-center z-50">
-        <div
-          className="bg-white pt-3 rounded-lg overflow-hidden shadow-lg relative z-10 w-full mx-4 md:mx-0 md:w-1/2 lg:w-1/3 glass-effect">
-          <div className="p-6">
+      <div className="fixed inset-0 bg-black opacity-90 " ></div>
+      <div className="fixed inset-0 flex items-center justify-center z-50 ">
+        <div onClick={() => onRegisterClick(title)} className="bg-white pt-3 rounded-lg overflow-hidden shadow-lg relative z-10 w-full mx-4 md:mx-0 md:w-1/2 lg:w-1/3 glass-effect" >
+          <div className="p-6 tracking-wider">
             <div className="flex justify-between items-center">
-              <h2 className="text-xl md:text-2xl text-[#FF884B] font-semibold mb-4">{title}</h2>
+              <h2 className="text-2xl md:text-3xl text-[#FF884B] font-semibold mb-4">{title}</h2>
               <button className="text-black text-2xl hover:text-gray-400 transition-all duration-200">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none"
                   viewBox="0 0 24 24" stroke="currentColor"
@@ -56,11 +55,11 @@ const Popup = ({ index, title, event_type, uniquecode, event_code, event_pay_typ
               </button>
             </div>
             <div className="flex items-center">
-              <p className="text-white text-sm">{details}</p>
+              <p className="text-white text-sm md:text-base">{details}</p>
             </div>
             <div className="flex justify-between items-center">
-              <p className="text-white text-lg font-bold">{price}</p>
-              <button onClick={() => handleRegister(event_type, event_pay_type, event_code, "9778393558")} className="bg-[#FF884B] text-white text-[16px] md:text-base mt-2 font-medium py-2 px-4 rounded-[10px] hover:bg-[#FF783D] transition-all duration-200"
+              <p className="text-[#FF884B] text-lg font-bold">₹{price}</p>
+              <button onClick={() => handleRegister(event_type, event_pay_type, event_code, "9778393558")} className="bg-[#FF884B] text-white text-[16px] md:text-base mt-2 font-medium py-2 px-4 rounded-[10px] hover:bg-[#FF783D] transition-all duration-200 tracking-wider"
               >Register</button>
             </div>
           </div>
@@ -74,17 +73,17 @@ const Popup = ({ index, title, event_type, uniquecode, event_code, event_pay_typ
 const ServiceCard = ({ index, title, icon, details, price, register, onRegisterClick, urlFor }) => {
   const [clamp, setClamp] = useState(false);
   return (
-    <div className="md:w-[580px] px-4 sm:w-[480px] w-full">
+    <div className="md:w-[580px] px-4 sm:w-[480px] w-full tracking-wider">
       <div
         className='w-full orange-red-gradient p-[1px] rounded-[20px] shadow-card'>
         <div
-          className='bg-tertiary rounded-[20px] py-6 px-4 md:px-12 h-auto flex flex-col justify-between items-center'>
+          className='bg-[#332d2a] rounded-[20px] py-6 px-4 md:px-12 h-auto flex flex-col justify-between items-center'>
           <div className="flex flex-col items-center">
             {icon &&
               <img src={urlFor(icon)} alt={title} className='w-20 h-20 object-contain' />
             }
             <h1 className='text-white text-lg md:text-xl font-bold text-center my-4'>{title}</h1>
-            <p className={` ${clamp ? "line-clamp-none" : "line-clamp-3 md:line-clamp-6"}  text-white text-sm md:text-base font-medium text-center my-4`}
+            <p className={` ${clamp ? "line-clamp-none" : "line-clamp-3 md:line-clamp-6"}  text-white tracking-wider text-base md:text-lg font-medium text-center my-4`}
               onClick={() => {
                 setClamp(!clamp);
               }}>
@@ -159,15 +158,16 @@ const About = () => {
 
 
   const handleRegisterClick = (title) => {
+    console.log(title)
     setSelectedId(title);
   }
 
   return (
     <>
       <motion.div>
-        <h2 className={`${styles.sectionHeadText} text-center`}>Workshops</h2>
+        <h2 className={`${styles.sectionHeadText} text-center tracking-wider`}>Workshops</h2>
         {/*seach bar */}
-        <div className='w-full flex flex-col items-center gap-4 mt-8 md:flex-row md:justify-center md:items-center px-8'>
+        <div className='w-full flex flex-col items-center gap-4 mt-8 md:flex-row md:justify-center md:items-center px-8 '>
           <input
             type='text'
             placeholder='Search'

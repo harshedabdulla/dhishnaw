@@ -23,15 +23,15 @@ const Navbar = ({id}) => {
               className={`${active === link.title
                   ? 'text-orange-500'
                   : 'text-white'
-                } hover:text-white text-[18px] flex items-center  font-medium cursor-pointer`}
+                } hover:text-white text-[22px] tracking-wider flex items-center  font-medium cursor-pointer`}
               onClick={() => {
                 setActive(link.title);
                 document.getElementById(link.id).scrollIntoView();
               }}
             >
-              <a href = {`#${link.id}`}>
+              <Link to = {`#${link.id}`}>
                 {link.title}
-              </a>
+              </Link>
             </div>
           ))}
           <Login />

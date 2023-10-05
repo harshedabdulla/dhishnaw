@@ -42,7 +42,7 @@ export default defineType({
           {title: 'Workshop', value: 'workshop'},
           {title: 'Competition', value: 'competition'},
           {title: 'Talk', value: 'talk'},
-          {title: 'Exhibition', value: 'exhibition'},
+          {title: 'Event', value: 'event'},
           {title: 'Other', value: 'other'},
         ],
       },
@@ -73,6 +73,11 @@ export default defineType({
       name: 'poster',
       title: 'Poster',
       type: 'image',
+    }),
+    defineField({
+      name: 'date',
+      title: 'Date',
+      type: 'date',
     }),
 
   ],
