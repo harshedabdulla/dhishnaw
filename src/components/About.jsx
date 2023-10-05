@@ -4,7 +4,6 @@ import { styles } from '../style'
 import { SectionWrapper } from '../hoc'
 import { auth } from '../firebase/config'
 import axios from 'axios'
-  
 import sanityClient from '../client'
 import { useEffect } from 'react'
 import imageUrlBuilder from '@sanity/image-url'
@@ -76,7 +75,9 @@ const ServiceCard = ({ index, title, icon, details, price, register, onRegisterC
         <div
           className='bg-tertiary rounded-[20px] py-6 px-4 md:px-12 h-auto flex flex-col justify-between items-center'>
           <div className="flex flex-col items-center">
-            <img src={urlFor(icon)} alt={title} className='w-20 h-20 object-contain' />
+            {icon &&
+              <img src={urlFor(icon)} alt={title} className='w-20 h-20 object-contain' />
+            }
             <h1 className='text-white text-lg md:text-xl font-bold text-center my-4'>{title}</h1>
             <p className={` ${clamp ? "line-clamp-none" : "line-clamp-3 md:line-clamp-6"}  text-white text-sm md:text-base font-medium text-center my-4`}
               onClick={() => {
