@@ -9,11 +9,14 @@ export default defineType({
       name: 'title',
       title: 'Title',
       type: 'string',
-    }),
+      validation : Rule => Rule.required(),
+    }
+    ),
     defineField({
       name: 'details',
       title: 'Details',
       type: 'text',
+      validation : Rule => Rule.required(),
     }),
     defineField({
       name: 'price',
@@ -34,11 +37,27 @@ export default defineType({
       name: 'event_type',
       title: 'Event_type',
       type: 'string',
+      options: {
+        list : [
+          {title: 'Workshop', value: 'workshop'},
+          {title: 'Competition', value: 'competition'},
+          {title: 'Talk', value: 'talk'},
+          {title: 'Exhibition', value: 'exhibition'},
+          {title: 'Other', value: 'other'},
+        ],
+      },
+
     }),
     defineField({
       name: 'event_pay_type',
       title: 'Event_pay_type',
       type: 'string',
+      options : {
+        list : [
+          {title: 'Free', value: 'free'},
+          {title: 'Paid', value: 'paid'},
+        ],
+      },
     }),
     defineField({
       name: 'event_code',
@@ -48,6 +67,11 @@ export default defineType({
     defineField({
       name: 'icon',
       title: 'Icon',
+      type: 'image',
+    }),
+    defineField({
+      name: 'poster',
+      title: 'Poster',
       type: 'image',
     }),
 

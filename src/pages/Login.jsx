@@ -60,13 +60,15 @@ const Login = () => {
   return (
     <div>
       <div className='mx-auto'>
-        { user ? (
-        <img src={auth.currentUser.photoURL} alt='profilephoto' className='h-9 w-9 rounded-full'/>
+        {user ? (
+          <a href='/profile'>
+            <img src={auth.currentUser.photoURL} alt='profilephoto' className='h-9 w-9 rounded-full' />
+          </a>
         ) : (
-        <button className='bg-[#FF884B] hover:bg-[#FF783D] text-white font-semibold rounded-sm w-28 py-2 px-4' onClick={handleSigninWithGoogle}>
-          Sign in
-        </button>
-              )}
+          <button className='bg-[#FF884B] hover:bg-[#FF783D] text-white font-semibold rounded-sm w-28 py-2 px-4' onClick={handleSigninWithGoogle}>
+            Sign in
+          </button>
+        )}
 
       </div>
     </div>
