@@ -8,7 +8,8 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
+  /* font-family: "Poppins", sans-serif; */
+  font-family: 'Kanit', sans-serif;
   scroll-behavior: smooth;
   color-scheme: dark;
 }
@@ -132,6 +133,22 @@
   animation: mulShdSpin 1.1s infinite ease;
   transform: translateZ(0);
 }
+
+.glass-effect {
+  --border-bottom-width: 2px;
+  --border-color: hsla(0,0%,100%,.05);
+  --border-left-width: 2px;
+  --border-right-width: 2px;
+  --border-style: solid;
+  --border-top-width: 2px;
+  -webkit-backdrop-filter: blur(40px);
+  backdrop-filter: blur(40px);
+  background-color: rgba(164, 164, 164, 0.2);
+  opacity: 1;
+  border-radius: 10px;
+  height: auto;
+}
+
 
 @keyframes mulShdSpin {
   0%,
