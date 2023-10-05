@@ -7,13 +7,11 @@ import { Tilt } from 'react-tilt'
 import { useStateContext } from '../context/stateContext'
 import { onAuthStateChanged } from 'firebase/auth'
 import { app, auth } from '../firebase/config';
-
 import { SocialIcon } from 'react-social-icons'
-import { auth } from '../firebase/config'
 
 
 const Profile = () => {
-  const {userDetails} = useStateContext()
+  const {userDetails, regEvents, regWorkshops, regComps, services, fetchServices} = useStateContext()
   const id = [{
     id: "/Profile",
     title: "Profile",
@@ -34,12 +32,6 @@ const Profile = () => {
     // Add more events as needed
   ];
 
-  // User profile information (replace with actual user data)
-  const userProfile = {
-    username: 'John Doe',
-    email: 'johndoe@example.com',
-    phone: '+1 (123) 456-7890',
-  };
   const badgeInfo = {
     eventName: 'Dhishna 2023',
     badgeText: 'Excited to be a part of Dhishna 2023!',
@@ -88,8 +80,11 @@ const Profile = () => {
   const {fetchUserDetails} = useStateContext()
 
   React.useEffect(() => {
+    if(services.length == 0){
+      fetchServices()
+    }
     auth.onAuthStateChanged((user) => {
-        if (user) {
+        if (user && userDetails.name == '') {
           console.log(user)
           fetchUserDetails()
         }
@@ -164,19 +159,19 @@ const Profile = () => {
 
             {/* Registered Events */}
             <div className="mt-8">
-              <h1 className="text-2xl font-semibold mb-4">Registered Events</h1>
+              <h1 className="text-2xl font-semibold mb-4">Registered Workshops</h1>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {registeredEvents.map((event) => (
+                {regWorkshops.map((event, i) => (
                   <div
-                    key={event.id}
+                    key={i}
                     className="bg-tertiary shadow-md p-6 rounded-lg"
                   >
                     <h2 className="text-lg font-semibold mb-2">
-                      {event.eventName}
+                      {services.find(e => e.event_code == event.code)?.title}
                     </h2>
                     <p className="text-gray-600">
-                      Date: {event.date}<br />
-                      Location: {event.location}
+                      Date: Random<br />
+                      Location: Random
                     </p>
                   </div>
                 ))}

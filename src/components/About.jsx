@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { motion } from 'framer-motion'
 import { styles } from '../style'
 import { SectionWrapper } from '../hoc'
@@ -7,6 +7,7 @@ import axios from 'axios'
 import sanityClient from '../client'
 import { useEffect } from 'react'
 import imageUrlBuilder from '@sanity/image-url'
+import { useStateContext } from '../context/stateContext'
 
 
 const Popup = ({ index, title, event_type, uniquecode, event_code, event_pay_type, icon, details, price, register, onRegisterClick }) => {
@@ -25,7 +26,10 @@ const Popup = ({ index, title, event_type, uniquecode, event_code, event_pay_typ
           'Authorization': auth.currentUser.accessToken
         }
       }
-      const res = await axios.post('https://neol7a57w4hxyq6iscz77r3uri0zeali.lambda-url.us-east-1.on.aws/add_registration_data', formData, headers)
+      const res = await axios.post('http://localhost:8081/add_registration_data', formData, headers)
+      if(res.data.success == 1){
+        console.log('registered')
+      }
       console.log(res)
     } catch (error) {
       console.log(error)
@@ -100,8 +104,7 @@ const ServiceCard = ({ index, title, icon, details, price, register, onRegisterC
   )
 }
 const About = () => {
-  const [services, setServices] = useState([]);
-  const [data, setData] = useState([]);
+  const {fetchServices, services, searchData, setSearchData} = useStateContext()
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedId, setSelectedId] = useState(null);
 
@@ -112,20 +115,11 @@ const About = () => {
   }
 
 
-  useEffect(() => {
-    sanityClient.fetch(`*[_type == "events"]{
-      title,
-      event_type,
-      event_code,
-      event_pay_type,
-      icon,
-      details,
-      price,
-      register
-    }`).then((data) => {
-      setServices(data)
-      setData(data)
-    }).catch(console.error)
+  React.useEffect(() => {
+    console.log(services)
+    if(services.length == 0){
+      fetchServices()
+    }
   }, [])
 
   const handleValue = (e) => {
@@ -133,13 +127,13 @@ const About = () => {
     const Term = e.target.value;
     try {
       if (Term === null || Term.trim() === '') {
-        setData(services);
+        setSearchData(services);
       } else {
         const filteredData = services.filter((item) =>
           item.title.toLowerCase().includes(Term.toLowerCase()) ||
           item.details.toLowerCase().includes(Term.toLowerCase())
         );
-        setData(filteredData);
+        setSearchData(filteredData);
       }
     } catch (error) {
       console.error("An error occurred:", error);
@@ -150,13 +144,13 @@ const About = () => {
   const handleSearch = () => {
     try {
       if (searchTerm === null || searchTerm.trim() === '') {
-        setData(services);
+        setSearchData(services);
       } else {
         const filteredData = services.filter((item) =>
           item.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
           item.details.toLowerCase().includes(searchTerm.toLowerCase())
         );
-        setData(filteredData);
+        setSearchData(filteredData);
       }
     } catch (error) {
       console.error("An error occurred:", error);
@@ -184,7 +178,7 @@ const About = () => {
         </div>
       </motion.div>
       <div className='mt-8 md:mt-16 flex flex-wrap gap-4 md:gap-8 xl:gap-16 justify-center'>
-        {data.map((service, index) => (
+        {searchData.map((service, index) => (
           <ServiceCard key={service.title} index={index} {...service}
             onRegisterClick={() => handleRegisterClick(service.title)}
             urlFor={urlFor}
@@ -192,7 +186,7 @@ const About = () => {
         ))}
         {selectedId &&
           <div>
-            {services.map((service, index) => (
+            {services && services.map((service, index) => (
               service.title === selectedId && <Popup key={service.title} index={index} {...service}
                 onRegisterClick={() => handleRegisterClick(null)}
               />
