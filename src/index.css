@@ -8,10 +8,20 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  /* font-family: "Poppins", sans-serif; */
-  font-family: 'Kanit', sans-serif;
+  font-family: Thunder2;
   scroll-behavior: smooth;
   color-scheme: dark;
+}
+
+
+@font-face {
+  font-family: 'Thunder';
+  src: url('./assets/Font/thunder/THUNDER/Fonts/OpenType-PS/Thunder-BlackLCItalic.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'Thunder2';
+  src: url('./assets/Font/thunder/THUNDER/Fonts/OpenType-PS/Thunder-MediumLC.otf') format('opentype');
 }
 
 .hash-span {
@@ -56,6 +66,12 @@
   background: -webkit-linear-gradient(-90.13deg, #FF884B 1.9%, #911e1e 97.5%);
 }
 
+.text-layout {
+  color: #fff1f1;
+  font-family: thunder;
+  letter-spacing: 6px;
+  text-shadow: 1px 1px #000, 2px 2px #000, 3px 3px #c83d02, 4px 4px #c83d02, 5px 5px #ff9100, 6px 6px #ff9100;
+}
 
 .orange-text-gradient {
   background: #f12711; /* fallback for old browsers */

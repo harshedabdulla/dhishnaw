@@ -3,6 +3,7 @@ import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth"
 import { app, auth } from '../firebase/config';
 import { github } from '../assets';
 import axios from 'axios'
+import { Link } from 'react-router-dom';
 
 const Login = () => {
   const [user, setUser] = React.useState(false);
@@ -59,9 +60,9 @@ const Login = () => {
     <div>
       <div className='mx-auto'>
         {user ? (
-          <a href='/profile'>
+          <Link to='/profile'>
             <img src={auth.currentUser.photoURL} alt='profilephoto' className='h-9 w-9 rounded-full' />
-          </a>
+          </Link>
         ) : (
           <button className='bg-[#FF884B] hover:bg-[#FF783D] text-white font-semibold rounded-sm w-28 py-2 px-4' onClick={handleSigninWithGoogle}>
             Sign in

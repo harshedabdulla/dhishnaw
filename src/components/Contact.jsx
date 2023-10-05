@@ -65,7 +65,7 @@ const Contact = () => {
 
   return (
     <div
-      className={`mt-12 max-w-6xl flex justify-center items-center flex-col xl:flex-row gap-12`}
+      className={`mt-12 max-w-6xl flex justify-center items-center flex-row gap-12 tracking-widest`}
     >
       <motion.div
         variants={slideIn("left", "tween", 0.2, 1)}
@@ -87,7 +87,7 @@ const Contact = () => {
               value={form.name}
               onChange={handleChange}
               placeholder="What's your good name?"
-              className='bg-tertiary py-4 px-6 placeholder:text-secondary text-white rounded-lg outline-none border-none text-sm sm:text-md font-medium'
+              className='bg-tertiary py-4 px-6 placeholder:text-secondary text-white rounded-lg outline-none border-none text-md font-medium'
             />
           </label>
           <label className='flex flex-col'>
@@ -98,7 +98,7 @@ const Contact = () => {
               value={form.email}
               onChange={handleChange}
               placeholder="What's your web address?"
-              className='bg-tertiary py-4 px-6 placeholder:text-secondary text-white rounded-lg outline-none border-none font-medium text-sm sm:text-md'
+              className='bg-tertiary py-4 px-6 placeholder:text-secondary text-white rounded-lg outline-none border-none font-medium text-md'
             />
           </label>
           <label className='flex flex-col'>
@@ -109,7 +109,7 @@ const Contact = () => {
               value={form.message}
               onChange={handleChange}
               placeholder='What you want to say?'
-              className='bg-tertiary py-4 px-6 placeholder:text-secondary text-white rounded-lg outline-none border-none font-medium text-sm sm:text-md'
+              className='bg-tertiary py-4 px-6 placeholder:text-secondary text-white rounded-lg outline-none border-none font-medium text-md'
             />
           </label>
 
