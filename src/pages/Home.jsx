@@ -11,9 +11,10 @@ import Feedbacks from '../components/Feedbacks'
 const Home = () => {
   return (
     <div className="relative z-0 bg-primary">
-        <div className="bg-hero-pattern bg-cover bg-no-repeat bg-center">
+        <div className="">
           <Navbar id={navLinks} />
           <Hero />
+        <StarsCanvas />
         </div>
         <section id="workshop" className="relative z-0">
         <About />
@@ -21,6 +22,7 @@ const Home = () => {
         </section>
         <section id="testimonials" className="relative z-0">
           <Feedbacks />
+        <StarsCanvas />
         </section>
         <div className="relative z-0">
           <section id="contact" className="relative z-0">

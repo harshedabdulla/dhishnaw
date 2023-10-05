@@ -18,7 +18,7 @@ const FeedbackCard = ({
     variants={fadeIn("", "spring", index * 0.5, 0.75)}
     className='orange-red-gradient p-10 rounded-3xl xs:w-[320px] w-full'
   >
-    <p className='text-white font-black text-[48px]'>"</p>
+    <p className='text-white font-black text-[48px] tracking-wide'>'' </p>
 
     <div className='mt-1'>
       <p className='text-white tracking-wider text-[18px]'>{testimonial}</p>
@@ -45,7 +45,7 @@ const FeedbackCard = ({
 
 const Feedbacks = () => {
   return (
-    <div className={`mt-12 bg-black-100 rounded-[20px]`}>
+    <div className={`mt-12 bg-black-100 rounded-[20px] opacity-90`}>
       <div
         className={`bg-tertiary rounded-2xl ${styles.padding} min-h-[280px]`}
       >
