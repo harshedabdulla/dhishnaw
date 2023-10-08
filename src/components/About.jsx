@@ -10,7 +10,7 @@ import imageUrlBuilder from '@sanity/image-url'
 import { useStateContext } from '../context/stateContext'
 
 
-const Popup = ({ index, title, event_type, uniquecode, event_code, ticket_type, icon, details, price, register, onRegisterClick }) => {
+const Popup = ({ index, title, event_type, uniquecode, event_code, ticket_type, icon, details, cover, price, register, onRegisterClick,urlFor }) => {
   const [refe, setRef] = React.useState('')
   const [error, setError] = React.useState(false);
   const handleRegister = async (event_type, ticket_type, event_code, phone_no, refe, register) => {
@@ -30,10 +30,10 @@ const Popup = ({ index, title, event_type, uniquecode, event_code, ticket_type, 
       }
       console.log(ticket_type)
       const res = await axios.post('http://localhost:8081/add_registration_data', formData, headers)
-      if(res.data.success == 1){
+      if (res.data.success == 1) {
         window.open('https://google.com', '_blank');
         window.location.replace('/profile')
-      }else if(res.data.already){
+      } else if (res.data.already) {
         window.open('https://google.com', '_blank');
       }
       console.log(res)
@@ -41,14 +41,15 @@ const Popup = ({ index, title, event_type, uniquecode, event_code, ticket_type, 
       console.log(error)
     }
   }
+  console.log(urlFor(cover))
   return (
     <div>
       <div className="fixed inset-0 bg-black opacity-90 " ></div>
       <div className="fixed inset-0 flex items-center justify-center z-50 ">
         <div className="bg-white pt-3 rounded-lg overflow-hidden shadow-lg relative z-10 w-full mx-4 md:mx-0 md:w-1/2 lg:w-1/3 glass-effect" >
           <div className="p-6 tracking-wider">
-            <div className="flex justify-between items-center">
-              <h2 className="text-2xl md:text-3xl text-[#FF884B] font-semibold mb-4">{title}</h2>
+            <div className="flex  justify-between items-center">
+                  <h2 className="text-2xl md:text-3xl text-[#FF884B] font-semibold mb-4">{title}</h2>
               <button className="text-white text-2xl hover:text-gray-400 transition-all duration-200">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none"
                   viewBox="0 0 24 24" stroke="currentColor"
@@ -84,23 +85,23 @@ const ServiceCard = ({ index, title, icon, details, price, register, onRegisterC
     <div className="md:w-[580px] px-4 sm:w-[480px] w-full tracking-wider">
       <div className='w-full orange-red-gradient p-[1px] rounded-[20px] shadow-card'>
         <div className='bg-[#332d2a] rounded-[20px] py-6 px-4 md:px-12 h-auto flex flex-col justify-between items-center'>
-        <div className="flex items-center">
-  {icon && (
-    <img src={urlFor(icon)} alt={title} className='w-16 h-16 object-contain rounded-full' />
-  )}
-  {title && (
-    <h1 className='text-white text-lg md:text-xl font-bold text-center ml-4'>{title}</h1>
-  )}
-</div>
-            {details && (
-              <p className={` ${clamp ? "line-clamp-none" : "line-clamp-3 md:line-clamp-6"}  text-white tracking-wider text-base md:text-lg font-medium text-center my-4`}
-                onClick={() => {
-                  setClamp(!clamp);
-                }}>
-                {details}
-              </p>
+          <div className="flex items-center">
+            {icon && (
+              <img src={urlFor(icon)} alt={title} className='w-16 h-16 object-contain rounded-full' />
             )}
-         
+            {title && (
+              <h1 className='text-white text-lg md:text-xl font-bold text-center ml-4'>{title}</h1>
+            )}
+          </div>
+          {details && (
+            <p className={` ${clamp ? "line-clamp-none" : "line-clamp-3 md:line-clamp-6"}  text-white tracking-wider text-base md:text-lg font-medium text-center my-4`}
+              onClick={() => {
+                setClamp(!clamp);
+              }}>
+              {details}
+            </p>
+          )}
+
           <div className="flex justify-between w-full mt-4 md:mt-6">
             {price && (
               <p className='text-white text-sm md:text-base text-center font-bold flex my-auto'>Price: <span className='text-[#FF884B]'>{price}</span></p>
@@ -117,7 +118,7 @@ const ServiceCard = ({ index, title, icon, details, price, register, onRegisterC
 }
 
 const About = () => {
-  const {fetchServices, services, searchData, setSearchData} = useStateContext()
+  const { fetchServices, services, searchData, setSearchData } = useStateContext()
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedId, setSelectedId] = useState(null);
 
@@ -130,7 +131,7 @@ const About = () => {
 
   React.useEffect(() => {
     console.log(services)
-    if(services.length == 0){
+    if (services.length == 0) {
       fetchServices()
     }
   }, [])
@@ -203,6 +204,7 @@ const About = () => {
             {services && services.map((service, index) => (
               service.title === selectedId && <Popup key={service.title} index={index} {...service}
                 onRegisterClick={() => handleRegisterClick(null)}
+                urlFor={urlFor}
               />
             ))}
           </div>
