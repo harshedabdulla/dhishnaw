@@ -32,12 +32,8 @@ export default defineType({
       options: {
         list : [
           {title: 'Workshop', value: 'workshop'},
-          {title: 'Seminar', value: 'seminar'},
-          {title: 'pre-workshop', value: 'pre-workshop'},
           {title: 'Competition', value: 'competition'},
-          {title: 'Talk', value: 'talk'},
-          {title: 'Event', value: 'event'},
-          {title: 'Other', value: 'other'},
+          {title: 'Event', value: 'event'}
         ],
       },
     }),

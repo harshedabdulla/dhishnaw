@@ -7,15 +7,15 @@ import {
   
   export const navLinks = [
     {
-      id: "workshop",
+      id: "#workshop",
       title: "Workshop",
     },
     {
-      id: "testimonials",
+      id: "#testimonials",
       title: "Testimonials",
     },
     {
-      id: "contact",
+      id: "#contact",
       title: "Contact",
     },
   ];
@@ -101,15 +101,15 @@ import {
   {
     testimonial:
       "Techfest Dhishna 2021 was an incredible experience. I was amazed by the innovative projects and workshops they offered.",
-    name: "John Smith",
+    name: "Naseem Shah",
     designation: "Participant",
     company: "Tech Enthusiast",
-    image: "https://randomuser.me/api/portraits/men/1.jpg",
+    image: "https://avatars.githubusercontent.com/u/44234669?v=4",
   },
   {
     testimonial:
       "I had the privilege of attending Techfest Dhishna 2021, and it exceeded my expectations. The organizers did a fantastic job!",
-    name: "Emily Davis",
+    name: "Kevin David",
     designation: "Attendee",
     company: "Tech Blogger",
     image: "https://randomuser.me/api/portraits/women/2.jpg",
@@ -117,7 +117,7 @@ import {
   {
     testimonial:
       "Techfest Dhishna 2021 was a game-changer for me. I learned so much and connected with brilliant minds in the industry.",
-    name: "Alex Johnson",
+    name: "Rohan Mathews",
     designation: "Workshop Participant",
     company: "Software Developer",
     image: "https://randomuser.me/api/portraits/men/3.jpg",

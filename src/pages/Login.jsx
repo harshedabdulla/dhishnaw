@@ -1,7 +1,6 @@
 import React from 'react'
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth"
 import { app, auth } from '../firebase/config';
-import { github } from '../assets';
 import axios from 'axios'
 import { Link } from 'react-router-dom';
 import { useStateContext } from '../context/stateContext';
