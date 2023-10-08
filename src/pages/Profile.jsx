@@ -110,10 +110,10 @@ const Profile = () => {
       <section
         className='flex flex-wrap w-full h-auto mx-auto'>
         <div className={`${styles.paddingX} absolute inset-0 top-[120px] max-w-7xl mx-auto flex flex-col md:flex-row items-start gap-5`}>
-          <div className='hidden md:flex flex-col justify-center items-center mt-5'>
+          {/* <div className='hidden md:flex flex-col justify-center items-center mt-5'>
             <div className='w-5 h-5  rounded-full bg-[#FF884B]' />
             <div className='w-1  h-40 violent-gradient' />
-          </div>
+          </div> */}
           <div>
             <h1 className={`${styles.heroHeadText}`}>Your <span className='text-[#FF884B]'>Profile</span></h1>
             <div className='my-4'>

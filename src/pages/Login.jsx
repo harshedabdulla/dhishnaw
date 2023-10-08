@@ -29,7 +29,7 @@ const Login = () => {
           'Authorization': auth.currentUser.accessToken
         }
       }
-      const res = await axios.post('https://neol7a57w4hxyq6iscz77r3uri0zeali.lambda-url.us-east-1.on.aws/create_folder', {}, headers)
+      const res = await axios.post('http://localhost:8081/create_folder', {}, headers)
       if (res.data.new == 1) {
         window.location.replace('/form')
       } else if (res.data.new == 0) {
@@ -72,8 +72,8 @@ const Login = () => {
             <img src={`${userDetails.profileimg ? ` data:image/jpeg;base64,${userDetails.profileimg}` : auth?.currentUser?.photoURL}`} onClick={() => setToggle(toggle => !toggle)} alt='profilephoto' className='hidden md:flex h-9 w-9 rounded-full' />
             {toggle && (
               <div className={` hidden md:flex flex-col absolute right-28 top-20 bg-white rounded-md shadow-lg py-2 w-40`}>
-                <Link to='/profile' className='block px-4 py-2 text-sm text-gray-700 hover:bg-[#FF783D] hover:text-gray-900'>Profile</Link>
-                <div onClick={async () => await auth.signOut()} className='block px-4 py-2 text-sm text-gray-700 hover:bg-[#FF783D] hover:text-gray-900'>Logout</div>
+                <Link to='/profile' className='block px-4 py-2 text-sm text-gray-700 hover:bg-[#FF783D] hover:text-gray-900 hover:cursor-pointer'>Profile</Link>
+                <div onClick={async () => await auth.signOut()} className='block px-4 py-2 text-sm text-gray-700 hover:bg-[#FF783D] hover:cursor-pointer hover:text-gray-900'>Logout</div>
               </div>
             )}
           </>
