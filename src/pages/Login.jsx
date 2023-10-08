@@ -1,5 +1,5 @@
 import React from 'react'
-import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth"
+import { getAuth, signInWithPopup, GoogleAuthProvider, signOut } from "firebase/auth"
 import { app, auth } from '../firebase/config';
 import axios from 'axios'
 import { Link } from 'react-router-dom';
@@ -57,15 +57,27 @@ const Login = () => {
         console.log(errorMessage);
       });
   }
+  // create a dropdown
 
-  const {userDetails} = useStateContext()
+  const { userDetails } = useStateContext()
   return (
     <div>
       <div className='mx-auto'>
         {user ? (
-          <Link to='/profile'>
-            <img src={`${userDetails.profileimg ? `data:image/jpeg;base64,${userDetails.profileimg}` : auth?.currentUser?.photoURL}`} alt='profilephoto' className='h-9 w-9 rounded-full' />
-          </Link>
+          <>
+            <div className='flex flex-col md:hidden gap-3'>
+              <Link to='/profile' className='block  text-base text-white hover:bg-[#FF783D] hover:text-gray-900'>Profile</Link>
+              <div onClick={async () => await auth.signOut()} className='block text-base text-white hover:bg-[#FF783D] hover:text-gray-900'>Logout</div>
+            </div>
+            <img src={`${userDetails.profileimg ? ` data:image/jpeg;base64,${userDetails.profileimg}` : auth?.currentUser?.photoURL}`} onClick={() => setToggle(toggle => !toggle)} alt='profilephoto' className='hidden md:flex h-9 w-9 rounded-full' />
+            {toggle && (
+              <div className={` hidden md:flex flex-col absolute right-28 top-20 bg-white rounded-md shadow-lg py-2 w-40`}>
+                <Link to='/profile' className='block px-4 py-2 text-sm text-gray-700 hover:bg-[#FF783D] hover:text-gray-900'>Profile</Link>
+                <div onClick={async () => await auth.signOut()} className='block px-4 py-2 text-sm text-gray-700 hover:bg-[#FF783D] hover:text-gray-900'>Logout</div>
+              </div>
+            )}
+          </>
+
         ) : (
           <button className='bg-[#FF884B] hover:bg-[#FF783D] text-white font-semibold rounded-sm w-28 py-2 px-4' onClick={handleSigninWithGoogle}>
             Sign in

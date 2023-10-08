@@ -10,7 +10,7 @@ import imageUrlBuilder from '@sanity/image-url'
 import { useStateContext } from '../context/stateContext'
 
 
-const Popup = ({ index, title, event_type, uniquecode, event_code, ticket_type, icon, details, price, register, onRegisterClick }) => {
+const Popup = ({ index, title, event_type, uniquecode, event_code, ticket_type, icon,Contact, details, cover, price, register, onRegisterClick,urlFor }) => {
   const [refe, setRef] = React.useState('')
   const [error, setError] = React.useState(false);
   const {userDetails} = useStateContext()
@@ -42,13 +42,14 @@ const Popup = ({ index, title, event_type, uniquecode, event_code, ticket_type, 
       console.log(error)
     }
   }
+  console.log(urlFor(cover))
   return (
     <div>
       <div className="fixed inset-0 bg-black opacity-90 " ></div>
       <div className="fixed inset-0 flex items-center justify-center z-50 ">
         <div className="bg-white pt-3 rounded-lg overflow-hidden shadow-lg relative z-10 w-full mx-4 md:mx-0 md:w-1/2 lg:w-1/3 glass-effect" >
           <div className="p-6 tracking-wider">
-            <div className="flex justify-between items-center">
+            <div className="flex  justify-between items-center">
               <h2 className="text-2xl md:text-3xl text-[#FF884B] font-semibold mb-4">{title}</h2>
               <button className="text-white text-2xl hover:text-gray-400 transition-all duration-200">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none"
@@ -61,8 +62,11 @@ const Popup = ({ index, title, event_type, uniquecode, event_code, ticket_type, 
                 </svg>
               </button>
             </div>
-            <div className="flex items-center">
+            <div className="flex items-center flex-col">
               <p className="text-white text-sm md:text-base">{details}</p>
+              {Contact &&
+                <p className='text-white text-sm md:text-base mt-4'>Contact <span className='text-[#FF884B]'>{Contact}</span></p>
+              }
             </div>
             <div className="flex justify-between items-center my-5">
               <p className="text-[#FF884B] text-lg font-bold">{price}</p>
@@ -119,7 +123,7 @@ const ServiceCard = ({ index, title, icon, details, price, register, onRegisterC
 }
 
 const About = () => {
-  const {fetchServices, services, searchData, setSearchData} = useStateContext()
+  const { fetchServices, services, searchData, setSearchData } = useStateContext()
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedId, setSelectedId] = useState(null);
 
@@ -132,7 +136,7 @@ const About = () => {
 
   React.useEffect(() => {
     console.log(services)
-    if(services.length == 0){
+    if (services.length == 0) {
       fetchServices()
     }
   }, [])
@@ -205,6 +209,7 @@ const About = () => {
             {services && services.map((service, index) => (
               service.title === selectedId && <Popup key={service.title} index={index} {...service}
                 onRegisterClick={() => handleRegisterClick(null)}
+                urlFor={urlFor}
               />
             ))}
           </div>
