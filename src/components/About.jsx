@@ -76,7 +76,7 @@ const ServiceCard = ({ index, title, icon, details, price, register, onRegisterC
         <div className='bg-[#332d2a] rounded-[20px] py-6 px-4 md:px-12 h-auto flex flex-col justify-between items-center'>
         <div className="flex items-center">
   {icon && (
-    <img src={urlFor(icon)} alt={title} className='w-16 h-16 object-contain rounded-full' />
+    <img src={urlFor(icon)} alt={title} className='w-10 h-10 object-contain rounded-full' />
   )}
   {title && (
     <h1 className='text-white text-lg md:text-xl font-bold text-center ml-4'>{title}</h1>
