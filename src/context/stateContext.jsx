@@ -77,6 +77,7 @@ export const StateContextProvider = ({ children }) => {
             ticket_type,
             icon,
             cover,
+            Contact,
             details,
             price,
             register

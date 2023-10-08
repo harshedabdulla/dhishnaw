@@ -10,7 +10,7 @@ import imageUrlBuilder from '@sanity/image-url'
 import { useStateContext } from '../context/stateContext'
 
 
-const Popup = ({ index, title, event_type, uniquecode, event_code, ticket_type, icon, details, cover, price, register, onRegisterClick,urlFor }) => {
+const Popup = ({ index, title, event_type, uniquecode, event_code, ticket_type, icon,Contact, details, cover, price, register, onRegisterClick,urlFor }) => {
   const [refe, setRef] = React.useState('')
   const [error, setError] = React.useState(false);
   const handleRegister = async (event_type, ticket_type, event_code, phone_no, refe, register) => {
@@ -49,7 +49,7 @@ const Popup = ({ index, title, event_type, uniquecode, event_code, ticket_type, 
         <div className="bg-white pt-3 rounded-lg overflow-hidden shadow-lg relative z-10 w-full mx-4 md:mx-0 md:w-1/2 lg:w-1/3 glass-effect" >
           <div className="p-6 tracking-wider">
             <div className="flex  justify-between items-center">
-                  <h2 className="text-2xl md:text-3xl text-[#FF884B] font-semibold mb-4">{title}</h2>
+              <h2 className="text-2xl md:text-3xl text-[#FF884B] font-semibold mb-4">{title}</h2>
               <button className="text-white text-2xl hover:text-gray-400 transition-all duration-200">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none"
                   viewBox="0 0 24 24" stroke="currentColor"
@@ -61,8 +61,11 @@ const Popup = ({ index, title, event_type, uniquecode, event_code, ticket_type, 
                 </svg>
               </button>
             </div>
-            <div className="flex items-center">
+            <div className="flex items-center flex-col">
               <p className="text-white text-sm md:text-base">{details}</p>
+              {Contact &&
+                <p className='text-white text-sm md:text-base mt-4'>Contact <span className='text-[#FF884B]'>{Contact}</span></p>
+              }
             </div>
             <div className="flex justify-between items-center">
               <p className="text-[#FF884B] text-lg font-bold">{price}</p>
