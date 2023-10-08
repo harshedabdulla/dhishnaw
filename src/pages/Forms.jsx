@@ -45,7 +45,8 @@ const Forms = () => {
         try {
             const headers = {
                 headers: {
-                    '_uid': auth.currentUser.uid
+                    '_uid': auth.currentUser.uid,
+                    'Authorization': auth.currentUser.accessToken
                 }
             }
             const formData2 = new FormData();

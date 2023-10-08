@@ -3,14 +3,19 @@ import Navbar from '../components/Navbar'
 import { styles } from '../style'
 import { StarsCanvas } from '../components/canvas'
 import { Tilt } from 'react-tilt'
+import { useStateContext } from '../context/stateContext'
+import { onAuthStateChanged } from 'firebase/auth'
+import { app, auth } from '../firebase/config';
 import { SocialIcon } from 'react-social-icons'
-import { auth } from '../firebase/config'
+
 import Footer from '../components/Footer'
 import logo3 from '../assets/logo3.png'
 
 
 
 const Profile = () => {
+  const {userDetails, regEvents, allRegEvents, regWorkshops, fetchAllRegisteredEvents, regComps, services, fetchServices} = useStateContext()
+  
   const id = [
     {
       id: "/",
@@ -45,12 +50,6 @@ const Profile = () => {
     // Add more events as needed
   ];
 
-  // User profile information (replace with actual user data)
-  const userProfile = {
-    username: 'John Doe',
-    email: 'johndoe@example.com',
-    phone: '+1 (123) 456-7890',
-  };
   const badgeInfo = {
     eventName: 'Dhishna 2023',
     badgeText: 'Excited to be a part of Dhishna 2023! Come join me at the event. ',
@@ -90,7 +89,20 @@ const Profile = () => {
     const url = `https://www.linkedin.com/sharing/share-offsite/?title=${encodeURIComponent(badgeInfo.badgeText)}`;
     window.open(url, '_blank', 'width=600,height=400');
   };
+  const {fetchUserDetails} = useStateContext()
 
+  React.useEffect(() => {
+    if(services.length == 0){
+      fetchServices()
+    }
+    auth.onAuthStateChanged((user) => {
+        if (user && userDetails.name == '') {
+          fetchUserDetails()
+          fetchAllRegisteredEvents()
+        }
+    }
+    )
+}, [])
   return (
     <div>
       <Navbar id={id} />
@@ -136,21 +148,21 @@ const Profile = () => {
               <div className="bg-tertiary orange-red-gradient shadow-md p-6 rounded-xl sm:text-left">
                 <div className="flex justify-center sm:justify-between items-center mb-4 mx-4">
                   <h1 className="text-3xl font-bold mb-4">Dhishna 2023</h1>
-                  <h2 className="text-xl font-medium mb-4">#45678</h2>
+                  {auth?.currentUser && <h2 className="text-xl font-medium mb-4">#{auth.currentUser.uid.substring(auth.currentUser.uid.length - 5)}</h2>}
                 </div>
                 <div className="mb-4 text-center">
                   <div className="relative inline-block">
-                    <img
-                      src="url_to_user_image.jpg" // Replace with the URL to the user's image
+                    {auth?.currentUser?.photoURL && <img
+                      src={`data:image/jpeg;base64,${userDetails.profileimg ||auth.currentUser.photoURL}`}
                       alt="User Profile"
                       className="w-16 h-16 object-cover rounded-full border-2 border-white shadow-lg"
-                    />
+                    />}
                     {/* Add a circular user image */}
                   </div>
-                  <p className="text-white my-4">{userProfile.username}</p>
+                  <p className="text-white my-4">{userDetails.name}</p>
                 </div>
                 <div className="mb-4 text-center">
-                  <p className="text-white">{userProfile.email}</p>
+                  <p className="text-white">{userDetails.email}</p>
                 </div>
 
               </div>
@@ -161,30 +173,30 @@ const Profile = () => {
             <div className="my-8">
               <h1 className="text-2xl font-semibold mb-4">Registered Events</h1>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {registeredEvents.map((event) => (
-                  <div
-                    key={event.id}
-                    className="bg-tertiary shadow-md p-6 rounded-lg relative"
-                  >
-                    {event.attended ? (
-                      <div
-                        className="absolute inset-x-0 bottom-0 h-2 bg-green-600"
-                      // If `attended` is true, show a green indicator
-                      ></div>
-                    ) : (
-                      <div
-                        className="absolute inset-x-0 bottom-0 h-2 bg-red-600"
-                      // If `attended` is false, show a red indicator
-                      ></div>
-                    )}
-                    <h2 className="text-lg font-semibold mb-2">{event.eventName}</h2>
-                    <p className="text-gray-600">
-                      Date: {event.date}<br />
-                      Location: {event.location}
-                    </p>
-                  </div>
-                ))}
-              </div>
+  {regWorkshops.map((event, i) => (
+    <div
+      key={event.id}
+      className="bg-tertiary shadow-md p-6 rounded-lg relative"
+    >
+      {allRegEvents && allRegEvents['payment status'] ? (
+        <div
+          className="absolute inset-x-0 bottom-0 h-2 bg-green-600"
+          // If `attended` is true, show a green indicator
+        ></div>
+      ) : (
+        <div
+          className="absolute inset-x-0 bottom-0 h-2 bg-red-600"
+          // If `attended` is false, show a red indicator
+        ></div>
+      )}
+      <h2 className="text-lg font-semibold mb-2">{services.find(e => e.event_code == event.code)?.title}</h2>
+      <p className="text-gray-600">
+        Date: Random<br />
+        Location: Random
+      </p>
+    </div>
+  ))}
+</div>
             </div>
 
           </section>

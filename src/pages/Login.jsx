@@ -3,6 +3,7 @@ import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth"
 import { app, auth } from '../firebase/config';
 import axios from 'axios'
 import { Link } from 'react-router-dom';
+import { useStateContext } from '../context/stateContext';
 
 const Login = () => {
   const [user, setUser] = React.useState(false);
@@ -19,18 +20,20 @@ const Login = () => {
   }, [])
 
 
+
   const insertToDB = async () => {
     try {
       const headers = {
         headers: {
-          'folder_name': auth.currentUser.uid
+          'folder_name': auth.currentUser.uid,
+          'Authorization': auth.currentUser.accessToken
         }
       }
       const res = await axios.post('http://localhost:8081/create_folder', {}, headers)
       if (res.data.new == 1) {
-        window.location.replace('/profile')
-      } else if (res.data.new == 0) {
         window.location.replace('/form')
+      } else if (res.data.new == 0) {
+        window.location.replace('/profile')
       }
     } catch (error) {
       console.log(error)
@@ -55,26 +58,14 @@ const Login = () => {
       });
   }
 
-
-
+  const {userDetails} = useStateContext()
   return (
     <div>
       <div className='mx-auto'>
         {user ? (
-          <>
-          <div className='md:hidden'>
-            <Link to='/profile' className='block text-center py-2 hover:bg-[#FF884B] hover:text-white'>Profile</Link>
-            <div onClick={() => auth.signOut()} className='block text-center py-2 hover:bg-[#FF884B] hover:text-white'>Logout</div>
-            </div>
-            <img src={auth.currentUser.photoURL} alt='profilephoto' className='h-9 w-9 rounded-full hidden md:flex' onClick={() => setToggle(!toggle) }/>
-            {toggle && 
-              <div className='hidden md:flex flex-col bg-white text-black absolute top-20 right-24 w-40 h-20 rounded-md'>
-                <Link to='/profile' className='block text-center py-2 hover:bg-[#FF884B] hover:text-white'>Profile</Link>
-                <div onClick={() => auth.signOut()} className='block text-center py-2 hover:bg-[#FF884B] hover:text-white'>Logout</div>
-              </div>
-          }
-          </>
-
+          <Link to='/profile'>
+            <img src={`${userDetails.profileimg ? `data:image/jpeg;base64,${userDetails.profileimg}` : auth?.currentUser?.photoURL}`} alt='profilephoto' className='h-9 w-9 rounded-full' />
+          </Link>
         ) : (
           <button className='bg-[#FF884B] hover:bg-[#FF783D] text-white font-semibold rounded-sm w-28 py-2 px-4' onClick={handleSigninWithGoogle}>
             Sign in
