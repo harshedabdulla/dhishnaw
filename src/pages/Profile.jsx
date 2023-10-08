@@ -85,7 +85,7 @@ const Profile = () => {
     }
     auth.onAuthStateChanged((user) => {
         if (user && userDetails.name == '') {
-          console.log(user)
+          console.log('OKAYOKAY', user)
           fetchUserDetails()
         }
     }

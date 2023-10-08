@@ -11,7 +11,8 @@ import { useStateContext } from '../context/stateContext'
 
 
 const Popup = ({ index, title, event_type, uniquecode, event_code, event_pay_type, icon, details, price, register, onRegisterClick }) => {
-  const handleRegister = async (event_type, event_pay_type, event_code, phone_no) => {
+  const [refe, setRef] = React.useState('')
+  const handleRegister = async (event_type, event_pay_type, event_code, phone_no, refe, register) => {
     try {
       const formData = new FormData();
       formData.append('name', auth?.currentUser?.displayName);
@@ -19,6 +20,7 @@ const Popup = ({ index, title, event_type, uniquecode, event_code, event_pay_typ
       formData.append('event_pay_type', event_pay_type);
       formData.append('event_type', event_type);
       formData.append('event_code', event_code);
+      formData.append('refCode', refe);
       console.log(event_code)
       const headers = {
         headers: {
@@ -28,7 +30,7 @@ const Popup = ({ index, title, event_type, uniquecode, event_code, event_pay_typ
       }
       const res = await axios.post('http://localhost:8081/add_registration_data', formData, headers)
       if(res.data.success == 1){
-        console.log('registered')
+        window.open('https://google.com', '_blank');
       }
       console.log(res)
     } catch (error) {
@@ -39,7 +41,7 @@ const Popup = ({ index, title, event_type, uniquecode, event_code, event_pay_typ
     <div>
       <div className="fixed inset-0 bg-black opacity-90 " ></div>
       <div className="fixed inset-0 flex items-center justify-center z-50 ">
-        <div onClick={() => onRegisterClick(title)} className="bg-white pt-3 rounded-lg overflow-hidden shadow-lg relative z-10 w-full mx-4 md:mx-0 md:w-1/2 lg:w-1/3 glass-effect" >
+        <div className="bg-white pt-3 rounded-lg overflow-hidden shadow-lg relative z-10 w-full mx-4 md:mx-0 md:w-1/2 lg:w-1/3 glass-effect" >
           <div className="p-6 tracking-wider">
             <div className="flex justify-between items-center">
               <h2 className="text-2xl md:text-3xl text-[#FF884B] font-semibold mb-4">{title}</h2>
@@ -57,9 +59,10 @@ const Popup = ({ index, title, event_type, uniquecode, event_code, event_pay_typ
             <div className="flex items-center">
               <p className="text-white text-sm md:text-base">{details}</p>
             </div>
-            <div className="flex justify-between items-center">
+            <div className="flex justify-between items-center my-5">
               <p className="text-[#FF884B] text-lg font-bold">₹{price}</p>
-              <button onClick={() => handleRegister(event_type, event_pay_type, event_code, "9778393558")} className="bg-[#FF884B] text-white text-[16px] md:text-base mt-2 font-medium py-2 px-4 rounded-[10px] hover:bg-[#FF783D] transition-all duration-200 tracking-wider"
+              <input onChange={(e) => setRef(e.target.value)} type="text" name="" placeholder='Enter referral code' className='pl-3 bg-white py-2 rounded-[5px] text-zinc-800' id="" />
+              <button onClick={() => handleRegister(event_type, event_pay_type, event_code, "9778393558", refe, 'register')} className="bg-[#FF884B] text-white text-[16px] md:text-base mt-2 font-medium py-2 px-4 rounded-[10px] hover:bg-[#FF783D] transition-all duration-200 tracking-wider"
               >Register</button>
             </div>
           </div>

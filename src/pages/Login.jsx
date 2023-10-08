@@ -29,11 +29,11 @@ const Login = () => {
           'Authorization': auth.currentUser.accessToken
         }
       }
-      const res = await axios.post('https://neol7a57w4hxyq6iscz77r3uri0zeali.lambda-url.us-east-1.on.aws/create_folder', {}, headers)
+      const res = await axios.post('http://localhost:8081/create_folder', {}, headers)
       if (res.data.new == 1) {
-        window.location.replace('/profile')
-      } else if (res.data.new == 0) {
         window.location.replace('/form')
+      } else if (res.data.new == 0) {
+        window.location.replace('/profile')
       }
     } catch (error) {
       console.log(error)
@@ -64,7 +64,7 @@ const Login = () => {
       <div className='mx-auto'>
         {user ? (
           <Link to='/profile'>
-            <img src={`data:image/jpeg;base64,${userDetails.profileimg ||auth.currentUser.photoURL}`} alt='profilephoto' className='h-9 w-9 rounded-full' />
+            <img src={`data:image/jpeg;base64,${userDetails.profileimg || auth.currentUser.photoURL}`} alt='profilephoto' className='h-9 w-9 rounded-full' />
           </Link>
         ) : (
           <button className='bg-[#FF884B] hover:bg-[#FF783D] text-white font-semibold rounded-sm w-28 py-2 px-4' onClick={handleSigninWithGoogle}>

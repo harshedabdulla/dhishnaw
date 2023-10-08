@@ -29,6 +29,7 @@ export const StateContextProvider = ({ children }) => {
                 }
             }
             const res = await axios.get('http://localhost:8081/user', headers)
+            console.log('OKAYOKAY', res)
             if(res.data.user_data){
                 const jsonData1 = JSON.parse(res.data.user_data)
                 const jsonData2 = JSON.parse(res.data.event_details)
