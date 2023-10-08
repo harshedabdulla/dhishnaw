@@ -178,7 +178,7 @@ const Profile = () => {
       key={event.id}
       className="bg-tertiary shadow-md p-6 rounded-lg relative"
     >
-      {event.attended ? (
+      {allRegEvents && allRegEvents['payment status'] ? (
         <div
           className="absolute inset-x-0 bottom-0 h-2 bg-green-600"
           // If `attended` is true, show a green indicator
