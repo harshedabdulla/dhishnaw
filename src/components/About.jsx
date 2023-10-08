@@ -16,7 +16,7 @@ const Popup = ({ index, title, event_type, uniquecode, event_code, ticket_type, 
   const {userDetails} = useStateContext()
   const handleRegister = async (event_type, ticket_type, event_code, phone_no, refe, register) => {
     try {
-      console.log(phone_no, ticket_type, event_type, event_code, refe, register)
+      //console.log(phone_no, ticket_type, event_type, event_code, refe, register)
       const formData = new FormData();
       formData.append('name', auth?.currentUser?.displayName);
       formData.append('phone_no', phone_no);
@@ -30,19 +30,19 @@ const Popup = ({ index, title, event_type, uniquecode, event_code, ticket_type, 
           'Authorization': auth.currentUser.accessToken
         }
       }
-      console.log(register)
+      //console.log(register)
       const res = await axios.post('https://neol7a57w4hxyq6iscz77r3uri0zeali.lambda-url.us-east-1.on.aws/add_registration_data', formData, headers)
       if(res.data.success == 1){
         window.location.href = register;
       }else if(res.data.already){
         window.location.href = register;
       }
-      console.log(res)
+      //console.log(res)
     } catch (error) {
-      console.log(error)
+      //console.log(error)
     }
   }
-  console.log(urlFor(cover))
+  //console.log(urlFor(cover))
   return (
     <div>
       <div className="fixed inset-0 bg-black opacity-90 " ></div>
@@ -135,7 +135,7 @@ const About = () => {
 
 
   React.useEffect(() => {
-    console.log(services)
+    //console.log(services)
     if (services.length == 0) {
       fetchServices()
     }
@@ -178,7 +178,7 @@ const About = () => {
 
 
   const handleRegisterClick = (title) => {
-    console.log(title)
+    //console.log(title)
     setSelectedId(title);
   }
 

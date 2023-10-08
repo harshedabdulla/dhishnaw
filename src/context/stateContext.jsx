@@ -22,7 +22,7 @@ export const StateContextProvider = ({ children }) => {
 
     const fetchUserDetails = async() => {
         try {
-            console.log('aaaauth', auth)
+            //console.log('aaaauth', auth)
             const headers = {
                 headers: {
                     "_uid": auth.currentUser.uid,
@@ -30,11 +30,11 @@ export const StateContextProvider = ({ children }) => {
                 }
             }
             const res = await axios.get('https://neol7a57w4hxyq6iscz77r3uri0zeali.lambda-url.us-east-1.on.aws/user', headers)
-            console.log('OKAYOKAY', res)
+            //console.log('OKAYOKAY', res)
             if(res.data.user_data){
                 const jsonData1 = JSON.parse(res.data.user_data)
                 const jsonData2 = JSON.parse(res.data.event_details)
-                console.log(jsonData2)
+                //console.log(jsonData2)
                 setUserDetails({
                     name: jsonData1.name,
                     email: jsonData1.email,
@@ -45,9 +45,9 @@ export const StateContextProvider = ({ children }) => {
                 setRegComps(jsonData2.competition)
                 setRegWorkshops(jsonData2.workshop)
             }
-            console.log(res)
+            //console.log(res)
         } catch (error) {
-            console.log(error)
+            //console.log(error)
         }
     }
 
@@ -61,7 +61,7 @@ export const StateContextProvider = ({ children }) => {
             }
             const res = await axios.get('https://neol7a57w4hxyq6iscz77r3uri0zeali.lambda-url.us-east-1.on.aws/get_registered_events', headers)
             if(res){
-                console.log(res)
+                //console.log(res)
                 setAllRegEvents(res.data.events)
             }
         } catch (error) {
@@ -82,7 +82,7 @@ export const StateContextProvider = ({ children }) => {
             price,
             register
           }`).then((data) => {
-            console.log('lol')
+            //console.log('lol')
             setServices(data)
             setSearchData(data)
           }).catch(console.error)

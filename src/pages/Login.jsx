@@ -36,7 +36,7 @@ const Login = () => {
         window.location.replace('/profile')
       }
     } catch (error) {
-      console.log(error)
+      //console.log(error)
     }
   }
 
@@ -54,7 +54,7 @@ const Login = () => {
         const errorCode = error.code;
         const errorMessage = error.message;
         const credential = GoogleAuthProvider.credentialFromError(error);
-        console.log(errorMessage);
+        //console.log(errorMessage);
       });
   }
   // create a dropdown
