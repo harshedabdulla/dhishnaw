@@ -74,13 +74,14 @@ const ServiceCard = ({ index, title, icon, details, price, register, onRegisterC
     <div className="md:w-[580px] px-4 sm:w-[480px] w-full tracking-wider">
       <div className='w-full orange-red-gradient p-[1px] rounded-[20px] shadow-card'>
         <div className='bg-[#332d2a] rounded-[20px] py-6 px-4 md:px-12 h-auto flex flex-col justify-between items-center'>
-          <div className="flex flex-col items-center">
-            {icon && (
-              <img src={urlFor(icon)} alt={title} className='w-20 h-20 object-contain' />
-            )}
-            {title && (
-              <h1 className='text-white text-lg md:text-xl font-bold text-center my-4'>{title}</h1>
-            )}
+        <div className="flex items-center">
+  {icon && (
+    <img src={urlFor(icon)} alt={title} className='w-16 h-16 object-contain rounded-full' />
+  )}
+  {title && (
+    <h1 className='text-white text-lg md:text-xl font-bold text-center ml-4'>{title}</h1>
+  )}
+</div>
             {details && (
               <p className={` ${clamp ? "line-clamp-none" : "line-clamp-3 md:line-clamp-6"}  text-white tracking-wider text-base md:text-lg font-medium text-center my-4`}
                 onClick={() => {
@@ -89,7 +90,7 @@ const ServiceCard = ({ index, title, icon, details, price, register, onRegisterC
                 {details}
               </p>
             )}
-          </div>
+         
           <div className="flex justify-between w-full mt-4 md:mt-6">
             {price && (
               <p className='text-white text-sm md:text-base text-center font-bold flex my-auto'>Price: <span className='text-[#FF884B]'>{price}</span></p>
