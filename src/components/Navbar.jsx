@@ -29,7 +29,7 @@ const Navbar = ({id}) => {
                 document.getElementById(link.id).scrollIntoView();
               }}
             >
-              <Link to = {`#${link.id}`}>
+              <Link to = {`${link.id}`}>
                 {link.title}
               </Link>
             </div>

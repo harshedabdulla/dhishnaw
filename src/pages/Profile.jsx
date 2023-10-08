@@ -1,6 +1,5 @@
-import React ,{useEffect} from 'react'
+import React, { useEffect } from 'react'
 import Navbar from '../components/Navbar'
-import { navLinks } from '../constants'
 import { styles } from '../style'
 import { StarsCanvas } from '../components/canvas'
 import { Tilt } from 'react-tilt'
@@ -11,10 +10,24 @@ import Footer from '../components/Footer'
 
 
 const Profile = () => {
-  const id = [{
-    id: "/Profile",
-    title: "Profile",
-  }]
+  const id = [
+    {
+      id: "/",
+      title: "Home",
+    },
+    {
+      id: "/#workshop",
+      title: "Workshop",
+    }
+    , {
+      id: "/#contact",
+      title: "Contact",
+    }
+    , {
+      id: "/#testimonials",
+      title: "Testimonials",
+    }
+  ]
   const registeredEvents = [
     {
       id: 1,
@@ -50,13 +63,13 @@ const Profile = () => {
     },
   };
 
-    useEffect(() => {
-        auth.onAuthStateChanged((user) => {
-            if (!user) {
-                window.location.href = '/'
-            }
-        })
-    }, [])
+  useEffect(() => {
+    auth.onAuthStateChanged((user) => {
+      if (!user) {
+        window.location.href = '/'
+      }
+    })
+  }, [])
 
 
   // Function to handle sharing on Facebook
@@ -153,40 +166,40 @@ const Profile = () => {
             <div className="my-8">
               <h1 className="text-2xl font-semibold mb-4">Registered Events</h1>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-  {registeredEvents.map((event) => (
-    <div
-      key={event.id}
-      className="bg-tertiary shadow-md p-6 rounded-lg relative"
-    >
-      {event.attended ? (
-        <div
-          className="absolute inset-x-0 bottom-0 h-2 bg-green-600"
-          // If `attended` is true, show a green indicator
-        ></div>
-      ) : (
-        <div
-          className="absolute inset-x-0 bottom-0 h-2 bg-red-600"
-          // If `attended` is false, show a red indicator
-        ></div>
-      )}
-      <h2 className="text-lg font-semibold mb-2">{event.eventName}</h2>
-      <p className="text-gray-600">
-        Date: {event.date}<br />
-        Location: {event.location}
-      </p>
-    </div>
-  ))}
-</div>
+                {registeredEvents.map((event) => (
+                  <div
+                    key={event.id}
+                    className="bg-tertiary shadow-md p-6 rounded-lg relative"
+                  >
+                    {event.attended ? (
+                      <div
+                        className="absolute inset-x-0 bottom-0 h-2 bg-green-600"
+                      // If `attended` is true, show a green indicator
+                      ></div>
+                    ) : (
+                      <div
+                        className="absolute inset-x-0 bottom-0 h-2 bg-red-600"
+                      // If `attended` is false, show a red indicator
+                      ></div>
+                    )}
+                    <h2 className="text-lg font-semibold mb-2">{event.eventName}</h2>
+                    <p className="text-gray-600">
+                      Date: {event.date}<br />
+                      Location: {event.location}
+                    </p>
+                  </div>
+                ))}
+              </div>
             </div>
-            
+
           </section>
-       
+
         </div>
-        
+
       </section>
-      
+
       <StarsCanvas />
-     
+
     </div>
   )
 }
