@@ -7,6 +7,7 @@ import StarsCanvas from '../components/canvas/Stars'
 import About from '../components/About'
 import { navLinks } from '../constants'
 import Feedbacks from '../components/Feedbacks'
+import Footer from '../components/Footer'
 
 const Home = () => {
   return (
@@ -27,6 +28,7 @@ const Home = () => {
         <div className="relative z-0">
           <section id="contact" className="relative z-0">
           <Contact />
+          <Footer />
           <StarsCanvas />
           </section>
         </div>
