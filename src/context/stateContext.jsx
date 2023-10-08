@@ -29,7 +29,7 @@ export const StateContextProvider = ({ children }) => {
                     "Authorization": auth.currentUser.accessToken
                 }
             }
-            const res = await axios.get('http://localhost:8081/user', headers)
+            const res = await axios.get('https://neol7a57w4hxyq6iscz77r3uri0zeali.lambda-url.us-east-1.on.aws/user', headers)
             console.log('OKAYOKAY', res)
             if(res.data.user_data){
                 const jsonData1 = JSON.parse(res.data.user_data)
@@ -59,7 +59,7 @@ export const StateContextProvider = ({ children }) => {
                     "Authorization": auth.currentUser.accessToken
                 }
             }
-            const res = await axios.get('http://localhost:8081/get_registered_events', headers)
+            const res = await axios.get('https://neol7a57w4hxyq6iscz77r3uri0zeali.lambda-url.us-east-1.on.aws/get_registered_events', headers)
             if(res){
                 console.log(res)
                 setAllRegEvents(res.data.events)

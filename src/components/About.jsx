@@ -13,8 +13,10 @@ import { useStateContext } from '../context/stateContext'
 const Popup = ({ index, title, event_type, uniquecode, event_code, ticket_type, icon, details, price, register, onRegisterClick }) => {
   const [refe, setRef] = React.useState('')
   const [error, setError] = React.useState(false);
+  const {userDetails} = useStateContext()
   const handleRegister = async (event_type, ticket_type, event_code, phone_no, refe, register) => {
     try {
+      console.log(phone_no, ticket_type, event_type, event_code, refe, register)
       const formData = new FormData();
       formData.append('name', auth?.currentUser?.displayName);
       formData.append('phone_no', phone_no);
@@ -28,13 +30,12 @@ const Popup = ({ index, title, event_type, uniquecode, event_code, ticket_type, 
           'Authorization': auth.currentUser.accessToken
         }
       }
-      console.log(ticket_type)
-      const res = await axios.post('http://localhost:8081/add_registration_data', formData, headers)
+      console.log(register)
+      const res = await axios.post('https://neol7a57w4hxyq6iscz77r3uri0zeali.lambda-url.us-east-1.on.aws/add_registration_data', formData, headers)
       if(res.data.success == 1){
-        window.open('https://google.com', '_blank');
-        window.location.replace('/profile')
+        window.location.href = register;
       }else if(res.data.already){
-        window.open('https://google.com', '_blank');
+        window.location.href = register;
       }
       console.log(res)
     } catch (error) {
@@ -66,7 +67,7 @@ const Popup = ({ index, title, event_type, uniquecode, event_code, ticket_type, 
             <div className="flex justify-between items-center my-5">
               <p className="text-[#FF884B] text-lg font-bold">{price}</p>
               <input type="text" name="" className='bg-white text-black pl-3 py-3 rounded-[5px]' onChange={(e) => setRef(e.target.value)} id="" />
-              <button onClick={() => handleRegister(event_type, ticket_type, event_code, "9778393558", refe, 'register')} className="bg-[#FF884B] text-white text-[16px] md:text-base mt-2 font-medium py-2 px-4 rounded-[10px] hover:bg-[#FF783D] transition-all duration-200 tracking-wider"
+              <button onClick={() => handleRegister(event_type, ticket_type, event_code, userDetails.phone || '666', refe || '666', register)} className="bg-[#FF884B] text-white text-[16px] md:text-base mt-2 font-medium py-2 px-4 rounded-[10px] hover:bg-[#FF783D] transition-all duration-200 tracking-wider"
               >Register</button>
             </div>
             {error && <p className="text-red-500 text-sm mt-2">Please Login to Register.</p>}
