@@ -9,6 +9,9 @@ import { onAuthStateChanged } from 'firebase/auth'
 import { app, auth } from '../firebase/config';
 import { SocialIcon } from 'react-social-icons'
 
+import Footer from '../components/Footer'
+
+
 
 const Profile = () => {
   const {userDetails, regEvents, regWorkshops, regComps, services, fetchServices} = useStateContext()
@@ -158,29 +161,43 @@ const Profile = () => {
 
 
             {/* Registered Events */}
-            <div className="mt-8">
-              <h1 className="text-2xl font-semibold mb-4">Registered Workshops</h1>
+            <div className="my-8">
+              <h1 className="text-2xl font-semibold mb-4">Registered Events</h1>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {regWorkshops.map((event, i) => (
-                  <div
-                    key={i}
-                    className="bg-tertiary shadow-md p-6 rounded-lg"
-                  >
-                    <h2 className="text-lg font-semibold mb-2">
-                      {services.find(e => e.event_code == event.code)?.title}
-                    </h2>
-                    <p className="text-gray-600">
-                      Date: Random<br />
-                      Location: Random
-                    </p>
-                  </div>
-                ))}
-              </div>
+  {regWorkshops.map((event, i) => (
+    <div
+      key={event.id}
+      className="bg-tertiary shadow-md p-6 rounded-lg relative"
+    >
+      {event.attended ? (
+        <div
+          className="absolute inset-x-0 bottom-0 h-2 bg-green-600"
+          // If `attended` is true, show a green indicator
+        ></div>
+      ) : (
+        <div
+          className="absolute inset-x-0 bottom-0 h-2 bg-red-600"
+          // If `attended` is false, show a red indicator
+        ></div>
+      )}
+      <h2 className="text-lg font-semibold mb-2">{services.find(e => e.event_code == event.code)?.title}</h2>
+      <p className="text-gray-600">
+        Date: Random<br />
+        Location: Random
+      </p>
+    </div>
+  ))}
+</div>
             </div>
+            
           </section>
+       
         </div>
+        
       </section>
+      
       <StarsCanvas />
+     
     </div>
   )
 }
