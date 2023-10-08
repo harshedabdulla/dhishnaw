@@ -54,7 +54,7 @@ const Forms = () => {
             formData2.append('email', formData.email);
             formData2.append('phone', formData.phoneNumber);
             formData2.append('image', formData.photo);
-            const res = await axios.post('http://localhost:8081/insertUser', formData2, headers)
+            const res = await axios.post('https://neol7a57w4hxyq6iscz77r3uri0zeali.lambda-url.us-east-1.on.aws/insertUser', formData2, headers)
             console.log(res)
             if (res.data.success) {
                 window.location.replace('/profile')
