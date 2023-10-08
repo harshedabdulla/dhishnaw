@@ -10,26 +10,29 @@ import imageUrlBuilder from '@sanity/image-url'
 import { useStateContext } from '../context/stateContext'
 
 
-const Popup = ({ index, title, event_type, uniquecode, event_code, event_pay_type, icon, details, price, register, onRegisterClick }) => {
+const Popup = ({ index, title, event_type, uniquecode, event_code, ticket_type, icon, details, price, register, onRegisterClick }) => {
   const [refe, setRef] = React.useState('')
-  const handleRegister = async (event_type, event_pay_type, event_code, phone_no, refe, register) => {
+  const handleRegister = async (event_type, ticket_type, event_code, phone_no, refe, register) => {
     try {
       const formData = new FormData();
       formData.append('name', auth?.currentUser?.displayName);
       formData.append('phone_no', phone_no);
-      formData.append('event_pay_type', event_pay_type);
+      formData.append('event_pay_type', ticket_type);
       formData.append('event_type', event_type);
       formData.append('event_code', event_code);
       formData.append('refCode', refe);
-      console.log(event_code)
       const headers = {
         headers: {
           '_uid': auth.currentUser.uid,
           'Authorization': auth.currentUser.accessToken
         }
       }
+      console.log(ticket_type)
       const res = await axios.post('http://localhost:8081/add_registration_data', formData, headers)
       if(res.data.success == 1){
+        window.open('https://google.com', '_blank');
+        window.location.replace('/profile')
+      }else if(res.data.already){
         window.open('https://google.com', '_blank');
       }
       console.log(res)
@@ -45,7 +48,7 @@ const Popup = ({ index, title, event_type, uniquecode, event_code, event_pay_typ
           <div className="p-6 tracking-wider">
             <div className="flex justify-between items-center">
               <h2 className="text-2xl md:text-3xl text-[#FF884B] font-semibold mb-4">{title}</h2>
-              <button className="text-black text-2xl hover:text-gray-400 transition-all duration-200">
+              <button className="text-white text-2xl hover:text-gray-400 transition-all duration-200">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none"
                   viewBox="0 0 24 24" stroke="currentColor"
                   onClick={() => {
@@ -62,7 +65,7 @@ const Popup = ({ index, title, event_type, uniquecode, event_code, event_pay_typ
             <div className="flex justify-between items-center my-5">
               <p className="text-[#FF884B] text-lg font-bold">₹{price}</p>
               <input onChange={(e) => setRef(e.target.value)} type="text" name="" placeholder='Enter referral code' className='pl-3 bg-white py-2 rounded-[5px] text-zinc-800' id="" />
-              <button onClick={() => handleRegister(event_type, event_pay_type, event_code, "9778393558", refe, 'register')} className="bg-[#FF884B] text-white text-[16px] md:text-base mt-2 font-medium py-2 px-4 rounded-[10px] hover:bg-[#FF783D] transition-all duration-200 tracking-wider"
+              <button onClick={() => handleRegister(event_type, ticket_type, event_code, "9778393558", refe, 'register')} className="bg-[#FF884B] text-white text-[16px] md:text-base mt-2 font-medium py-2 px-4 rounded-[10px] hover:bg-[#FF783D] transition-all duration-200 tracking-wider"
               >Register</button>
             </div>
           </div>

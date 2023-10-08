@@ -15,6 +15,7 @@ export const StateContextProvider = ({ children }) => {
 
     const [services, setServices] = React.useState([]);
     const [searchData, setSearchData] = React.useState([]);
+    const [allRegEvents, setAllRegEvents] = React.useState([])
     const [regEvents, setRegEvents] = React.useState([])
     const [regComps, setRegComps] = React.useState([])
     const [regWorkshops, setRegWorkshops] = React.useState([])
@@ -50,12 +51,30 @@ export const StateContextProvider = ({ children }) => {
         }
     }
 
+    const fetchAllRegisteredEvents = async() => {
+        try {
+            const headers = {
+                headers: {
+                    "_uid": auth.currentUser.uid,
+                    "Authorization": auth.currentUser.accessToken
+                }
+            }
+            const res = await axios.get('http://localhost:8081/get_registered_events', headers)
+            if(res){
+                console.log(res)
+                setAllRegEvents(res.events)
+            }
+        } catch (error) {
+            
+        }
+    }
+
     const fetchServices = () => {
         sanityClient.fetch(`*[_type == "events"]{
             title,
             event_type,
             event_code,
-            event_pay_type,
+            ticket_type,
             icon,
             details,
             price,
@@ -74,6 +93,9 @@ export const StateContextProvider = ({ children }) => {
         regEvents,
         regWorkshops,
         regComps,
+        allRegEvents,
+        setAllRegEvents,
+        fetchAllRegisteredEvents,
         setSearchData,
         setServices,
         setUserDetails,

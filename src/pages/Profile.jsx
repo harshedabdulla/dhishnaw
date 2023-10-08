@@ -1,6 +1,5 @@
 import React ,{useEffect} from 'react'
 import Navbar from '../components/Navbar'
-import { navLinks } from '../constants'
 import { styles } from '../style'
 import { StarsCanvas } from '../components/canvas'
 import { Tilt } from 'react-tilt'
@@ -14,10 +13,10 @@ import Footer from '../components/Footer'
 
 
 const Profile = () => {
-  const {userDetails, regEvents, regWorkshops, regComps, services, fetchServices} = useStateContext()
+  const {userDetails, regEvents, allRegEvents, regWorkshops, fetchAllRegisteredEvents, regComps, services, fetchServices} = useStateContext()
   const id = [{
-    id: "/Profile",
-    title: "Profile",
+    // id: "/Profile",
+    // title: "Profile",
   }]
   const registeredEvents = [
     {
@@ -88,8 +87,8 @@ const Profile = () => {
     }
     auth.onAuthStateChanged((user) => {
         if (user && userDetails.name == '') {
-          console.log('OKAYOKAY', user)
           fetchUserDetails()
+          fetchAllRegisteredEvents()
         }
     }
     )

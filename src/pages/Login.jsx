@@ -8,6 +8,7 @@ import { useStateContext } from '../context/stateContext';
 
 const Login = () => {
   const [user, setUser] = React.useState(false);
+  const [toggle, setToggle] = React.useState(false);
 
   React.useEffect(() => {
     auth.onAuthStateChanged((user) => {
@@ -64,7 +65,7 @@ const Login = () => {
       <div className='mx-auto'>
         {user ? (
           <Link to='/profile'>
-            <img src={`data:image/jpeg;base64,${userDetails.profileimg || auth.currentUser.photoURL}`} alt='profilephoto' className='h-9 w-9 rounded-full' />
+            <img src={`${userDetails.profileimg ? `data:image/jpeg;base64,${userDetails.profileimg}` : auth?.currentUser?.photoURL}`} alt='profilephoto' className='h-9 w-9 rounded-full' />
           </Link>
         ) : (
           <button className='bg-[#FF884B] hover:bg-[#FF783D] text-white font-semibold rounded-sm w-28 py-2 px-4' onClick={handleSigninWithGoogle}>
