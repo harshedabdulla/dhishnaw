@@ -103,6 +103,7 @@ const Profile = () => {
     }
     )
 }, [])
+
   return (
     <div>
       <Navbar id={id} />
@@ -171,14 +172,14 @@ const Profile = () => {
 
             {/* Registered Events */}
             <div className="my-8">
-              <h1 className="text-2xl font-semibold mb-4">Registered Events</h1>
+              <h1 className="text-2xl font-semibold mb-4">Registered Workshops</h1>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
   {regWorkshops.map((event, i) => (
     <div
       key={event.id}
       className="bg-tertiary shadow-md p-6 rounded-lg relative"
     >
-      {allRegEvents && allRegEvents['payment status'] ? (
+      {allRegEvents && allRegEvents.find(a => a.eventcode == event.code)?.['payment status'] ? (
         <div
           className="absolute inset-x-0 bottom-0 h-2 bg-green-600"
           // If `attended` is true, show a green indicator

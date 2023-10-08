@@ -62,7 +62,7 @@ export const StateContextProvider = ({ children }) => {
             const res = await axios.get('http://localhost:8081/get_registered_events', headers)
             if(res){
                 console.log(res)
-                setAllRegEvents(res.events)
+                setAllRegEvents(res.data.events)
             }
         } catch (error) {
             

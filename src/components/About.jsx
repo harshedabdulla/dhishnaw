@@ -63,8 +63,9 @@ const Popup = ({ index, title, event_type, uniquecode, event_code, ticket_type, 
             <div className="flex items-center">
               <p className="text-white text-sm md:text-base">{details}</p>
             </div>
-            <div className="flex justify-between items-center">
+            <div className="flex justify-between items-center my-5">
               <p className="text-[#FF884B] text-lg font-bold">{price}</p>
+              <input type="text" name="" className='bg-white text-black pl-3 py-3 rounded-[5px]' onChange={(e) => setRef(e.target.value)} id="" />
               <button onClick={() => handleRegister(event_type, ticket_type, event_code, "9778393558", refe, 'register')} className="bg-[#FF884B] text-white text-[16px] md:text-base mt-2 font-medium py-2 px-4 rounded-[10px] hover:bg-[#FF783D] transition-all duration-200 tracking-wider"
               >Register</button>
             </div>
@@ -83,7 +84,7 @@ const ServiceCard = ({ index, title, icon, details, price, register, onRegisterC
   return (
     <div className="md:w-[580px] px-4 sm:w-[480px] w-full tracking-wider">
       <div className='w-full orange-red-gradient p-[1px] rounded-[20px] shadow-card'>
-        <div className='bg-[#332d2a] rounded-[20px] py-6 px-4 md:px-12 h-auto flex flex-col justify-between items-center'>
+        <div className='bg-[#332d2a] randombg rounded-[20px] py-6 px-4 md:px-12 md:h-[450px] flex flex-col justify-between items-center'>
         <div className="flex items-center">
   {icon && (
     <img src={urlFor(icon)} alt={title} className='w-16 h-16 object-contain rounded-full' />

@@ -4,6 +4,10 @@
 @tailwind components;
 @tailwind utilities;
 
+.randombg{
+  background: url('./assets/herobg.png');
+}
+
 * {
   margin: 0;
   padding: 0;
