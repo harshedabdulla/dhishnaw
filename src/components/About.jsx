@@ -38,7 +38,7 @@ const Popup = ({ index, title, event_type, event_code, event_pay_type, icon, det
           <div className="p-6 tracking-wider">
             <div className="flex justify-between items-center">
               <h2 className="text-2xl md:text-3xl text-[#FF884B] font-semibold mb-4">{title}</h2>
-              <button className="text-black text-2xl hover:text-gray-400 transition-all duration-200">
+              <button className="text-white text-2xl hover:text-gray-400 transition-all duration-200">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none"
                   viewBox="0 0 24 24" stroke="currentColor"
                   onClick={() => {

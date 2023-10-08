@@ -1,6 +1,5 @@
 import React ,{useEffect} from 'react'
 import Navbar from '../components/Navbar'
-import { navLinks } from '../constants'
 import { styles } from '../style'
 import { StarsCanvas } from '../components/canvas'
 import { Tilt } from 'react-tilt'
@@ -12,8 +11,8 @@ import Footer from '../components/Footer'
 
 const Profile = () => {
   const id = [{
-    id: "/Profile",
-    title: "Profile",
+    // id: "/Profile",
+    // title: "Profile",
   }]
   const registeredEvents = [
     {

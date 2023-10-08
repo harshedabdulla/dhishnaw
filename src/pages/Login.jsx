@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 
 const Login = () => {
   const [user, setUser] = React.useState(false);
+  const [toggle, setToggle] = React.useState(false);
 
   React.useEffect(() => {
     auth.onAuthStateChanged((user) => {
@@ -56,13 +57,25 @@ const Login = () => {
   }
 
 
+
   return (
     <div>
       <div className='mx-auto'>
         {user ? (
-          <Link to='/profile'>
-            <img src={auth.currentUser.photoURL} alt='profilephoto' className='h-9 w-9 rounded-full' />
-          </Link>
+          <>
+          <div className='md:hidden'>
+            <Link to='/profile' className='block text-center py-2 hover:bg-[#FF884B] hover:text-white'>Profile</Link>
+            <div onClick={() => auth.signOut()} className='block text-center py-2 hover:bg-[#FF884B] hover:text-white'>Logout</div>
+            </div>
+            <img src={auth.currentUser.photoURL} alt='profilephoto' className='h-9 w-9 rounded-full hidden md:flex' onClick={() => setToggle(!toggle) }/>
+            {toggle && 
+              <div className='hidden md:flex flex-col bg-white text-black absolute top-20 right-24 w-40 h-20 rounded-md'>
+                <Link to='/profile' className='block text-center py-2 hover:bg-[#FF884B] hover:text-white'>Profile</Link>
+                <div onClick={() => auth.signOut()} className='block text-center py-2 hover:bg-[#FF884B] hover:text-white'>Logout</div>
+              </div>
+          }
+          </>
+
         ) : (
           <button className='bg-[#FF884B] hover:bg-[#FF783D] text-white font-semibold rounded-sm w-28 py-2 px-4' onClick={handleSigninWithGoogle}>
             Sign in
