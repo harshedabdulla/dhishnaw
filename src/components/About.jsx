@@ -70,7 +70,7 @@ const Popup = ({ index, title, event_type, uniquecode, event_code, ticket_type, 
             </div>
             <div className="flex justify-between items-center my-5">
               <p className="text-[#FF884B] text-lg font-bold">{price}</p>
-              <input type="text" name="" className='bg-white text-black pl-3 py-3 rounded-[5px]' onChange={(e) => setRef(e.target.value)} id="" />
+              <input type="text" placeholder="Enter referral code" name="" className='bg-white text-black pl-3 py-3 rounded-[5px]' onChange={(e) => setRef(e.target.value)} id="" />
               <button onClick={() => handleRegister(event_type, ticket_type, event_code, userDetails.phone || '666', refe || '666', register)} className="bg-[#FF884B] text-white text-[16px] md:text-base mt-2 font-medium py-2 px-4 rounded-[10px] hover:bg-[#FF783D] transition-all duration-200 tracking-wider"
               >Register</button>
             </div>
