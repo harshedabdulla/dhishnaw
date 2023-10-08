@@ -10,6 +10,7 @@ import imageUrlBuilder from '@sanity/image-url'
 
 
 const Popup = ({ index, title, event_type, event_code, event_pay_type, icon, details, price, register, onRegisterClick }) => {
+  const [error, setError] = useState(false);
   const handleRegister = async (event_type, event_pay_type, event_code, phone_no) => {
     try {
       const formData = new FormData();
@@ -53,10 +54,11 @@ const Popup = ({ index, title, event_type, event_code, event_pay_type, icon, det
               <p className="text-white text-sm md:text-base">{details}</p>
             </div>
             <div className="flex justify-between items-center">
-              <p className="text-[#FF884B] text-lg font-bold">₹{price}</p>
+              <p className="text-[#FF884B] text-lg font-bold">{price}</p>
               <button onClick={() => handleRegister(event_type, event_pay_type, event_code, "9778393558")} className="bg-[#FF884B] text-white text-[16px] md:text-base mt-2 font-medium py-2 px-4 rounded-[10px] hover:bg-[#FF783D] transition-all duration-200 tracking-wider"
               >Register</button>
             </div>
+            {error && <p className="text-red-500 text-sm mt-2">Please Login to Register.</p>}
           </div>
         </div>
       </div>
@@ -90,7 +92,7 @@ const ServiceCard = ({ index, title, icon, details, price, register, onRegisterC
           </div>
           <div className="flex justify-between w-full mt-4 md:mt-6">
             {price && (
-              <p className='text-white text-sm md:text-base text-center font-bold'>Price: ₹<span className='text-[#FF884B]'>{price}</span></p>
+              <p className='text-white text-sm md:text-base text-center font-bold flex my-auto'>Price: <span className='text-[#FF884B]'>{price}</span></p>
             )}
             <button className='bg-[#FF884B] text-white text-[16px] md:text-base mt-2 font-medium py-2 px-4 rounded-[10px] hover:bg-[#FF783D] transition-all duration-200'
               onClick={() => {
