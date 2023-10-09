@@ -17,7 +17,7 @@ const Home = () => {
           <Hero />
         <StarsCanvas />
         </div>
-        <section id="workshop" className="relative z-0">
+        <section className="relative z-0">
         <About />
         <StarsCanvas />
         </section>

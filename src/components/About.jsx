@@ -15,10 +15,15 @@ const Popup = ({ index, title, event_type, uniquecode, event_code, ticket_type, 
   const [refe, setRef] = React.useState('')
   const [error, setError] = React.useState(false);
   const {userDetails} = useStateContext()
+  React.useEffect(() => {
+    if(!auth?.currentUser){
+      setError(true)
+    }
+  }, [auth])
   const handleRegister = async (event_type, ticket_type, event_code, phone_no, refe, register) => {
     try {
-      window.location.href = register;
-      //console.log(phone_no, ticket_type, event_type, event_code, refe, register)
+      // window.location.href = register;
+      // console.log(phone_no, ticket_type, event_type, event_code, refe, register)
       const formData = new FormData();
       formData.append('name', auth?.currentUser?.displayName);
       formData.append('phone_no', phone_no);
@@ -33,21 +38,21 @@ const Popup = ({ index, title, event_type, uniquecode, event_code, ticket_type, 
         }
       }
       //console.log(register)
-      db.collection('DATA')
-      .add(formData)
-      .then((docRef) => {
-        console.log('Document written with ID: ', docRef.id);
-      })
-      .catch((error) => {
-        console.error('Error adding document: ', error);
-      });
-      // const res = await axios.post('https://neol7a57w4hxyq6iscz77r3uri0zeali.lambda-url.us-east-1.on.aws/add_registration_data/', formData, headers)
-      // if(res.data.success == 1){
-      //   window.location.href = register;
-      // }else if(res.data.already){
-      //   window.location.href = register;
-      // }
-      // console.log(res)
+      // db.collection('DATA')
+      // .add(formData)
+      // .then((docRef) => {
+      //   console.log('Document written with ID: ', docRef.id);
+      // })
+      // .catch((error) => {
+      //   console.error('Error adding document: ', error);
+      // });
+      const res = await axios.post('https://neol7a57w4hxyq6iscz77r3uri0zeali.lambda-url.us-east-1.on.aws/add_registration_data', formData, headers)
+      if(res.data.success == 1){
+        window.location.href = register;
+      }else if(res.data.already){
+        window.location.href = register;
+      }
+      console.log(res)
     } catch (error) {
       //console.log(error)
     }
@@ -80,9 +85,9 @@ const Popup = ({ index, title, event_type, uniquecode, event_code, ticket_type, 
             </div>
             <div className="flex justify-between items-center my-5">
               <p className="text-[#FF884B] text-lg font-bold">{price}</p>
-              <input type="text" placeholder="Enter referral code" name="" className='bg-white text-black pl-3 py-3 rounded-[5px]' onChange={(e) => setRef(e.target.value)} id="" />
+              {auth?.currentUser && <><input type="text" placeholder="Enter referral code" name="" className='bg-white text-black pl-3 py-3 rounded-[5px]' onChange={(e) => setRef(e.target.value)} id="" />
               <button onClick={() => handleRegister(event_type, ticket_type, event_code, userDetails.phone || '666', refe || '666', register)} className="bg-[#FF884B] text-white text-[16px] md:text-base mt-2 font-medium py-2 px-4 rounded-[10px] hover:bg-[#FF783D] transition-all duration-200 tracking-wider"
-              >Register</button>
+              >Register</button></>}
             </div>
             {error && <p className="text-red-500 text-sm mt-2">Please Login to Register.</p>}
           </div>
@@ -194,7 +199,7 @@ const About = () => {
 
   return (
     <>
-      <motion.div>
+      <motion.div id="workshop">
         <h2 className={`${styles.sectionHeadText} text-center tracking-wider`}>Workshops</h2>
         {/*seach bar */}
         <div className='w-full flex flex-col items-center gap-4 mt-8 md:flex-row md:justify-center md:items-center px-8 '>

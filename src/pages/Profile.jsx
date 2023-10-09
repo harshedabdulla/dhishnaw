@@ -192,8 +192,8 @@ const Profile = () => {
       )}
       <h2 className="text-lg font-semibold mb-2">{services.find(e => e.event_code == event.code)?.title}</h2>
       <p className="text-gray-600">
-        Date: Random<br />
-        Location: Random
+        Date: {services.find(s => s.event_code == event.code)?.start_date}<br />
+        Location: {services.find(s => s.event_code == event.code)?.venue}
       </p>
     </div>
   ))}

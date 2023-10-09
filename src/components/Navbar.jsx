@@ -26,10 +26,10 @@ const Navbar = ({id}) => {
                 } hover:text-white text-[22px] tracking-wider flex items-center  font-medium cursor-pointer`}
               onClick={() => {
                 setActive(link.title);
-                document.getElementById(link.id).scrollIntoView();
+                // document.getElementById(link.id).scrollIntoView();
               }}
             >
-              <Link to = {`${link.id}`}>
+              <Link to = {`/${link.id}`}>
                 {link.title}
               </Link>
             </div>
@@ -51,7 +51,7 @@ const Navbar = ({id}) => {
                   onClick={() => {
                     setToggle(!toggle);
                     setActive(link.title);
-                    document.getElementById(link.id).scrollIntoView({ behavior: 'smooth' });
+                    // document.getElementById(link.id).scrollIntoView({ behavior: 'smooth' });
                   }}
                 >
                   {link.title}

@@ -80,7 +80,9 @@ export const StateContextProvider = ({ children }) => {
             Contact,
             details,
             price,
-            register
+            register,
+            start_date,
+            venue
           }`).then((data) => {
             //console.log('lol')
             setServices(data)
