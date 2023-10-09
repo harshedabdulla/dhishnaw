@@ -37,7 +37,7 @@ const Popup = ({ index, title, event_type, uniquecode, event_code, ticket_type, 
       }else if(res.data.already){
         window.location.href = register;
       }
-      //console.log(res)
+      console.log(res)
     } catch (error) {
       //console.log(error)
     }
