@@ -154,7 +154,7 @@ const Profile = () => {
                 <div className="mb-4 text-center">
                   <div className="relative inline-block">
                     {auth?.currentUser?.photoURL && <img
-                      src={`data:image/jpeg;base64,${userDetails.profileimg ||auth.currentUser.photoURL}`}
+                      src={`${userDetails?.profileimg ? ` data:image/jpeg;base64,${userDetails.profileimg}` : auth?.currentUser?.photoURL}`}
                       alt="User Profile"
                       className="w-16 h-16 object-cover rounded-full border-2 border-white shadow-lg"
                     />}
