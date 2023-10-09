@@ -18,6 +18,10 @@ import {
       id: "#contact",
       title: "Contact",
     },
+    {
+      id: "/profile",
+      title: "Profile",
+    }
   ];
   
   const services = [
