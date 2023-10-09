@@ -1,7 +1,5 @@
-import React from 'react'
 import Navbar from '../components/Navbar'
 import Hero from '../components/Hero'
-import Login from './Login'
 import Contact from '../components/Contact'
 import StarsCanvas from '../components/canvas/Stars'
 import About from '../components/About'

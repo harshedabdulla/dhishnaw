@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Navbar from '../components/Navbar'
 import { styles } from '../style'
 import { StarsCanvas } from '../components/canvas'
@@ -7,9 +7,8 @@ import { useStateContext } from '../context/stateContext'
 import { onAuthStateChanged } from 'firebase/auth'
 import { app, auth } from '../firebase/config';
 import { SocialIcon } from 'react-social-icons'
-
-import Footer from '../components/Footer'
 import logo3 from '../assets/logo3.png'
+
 
 
 
@@ -34,21 +33,7 @@ const Profile = () => {
       title: "Testimonials",
     }
   ]
-  const registeredEvents = [
-    {
-      id: 1,
-      eventName: 'Robotics Workshop',
-      date: '2023-10-15',
-      location: 'Amenities Hall',
-    },
-    {
-      id: 2,
-      eventName: 'Web Development Workshop',
-      date: '2023-10-20',
-      location: 'Amenities Hall',
-    },
-    // Add more events as needed
-  ];
+  
 
   const badgeInfo = {
     eventName: 'Dhishna 2023',
@@ -103,9 +88,30 @@ const Profile = () => {
     }
     )
 }, [])
+const [isLoading, setIsLoading] = useState(true); // Initialize loading state
+
+  useEffect(() => {
+    const fetchData = async () => {
+      // Simulate loading or fetch data here
+      // For example, await some async operation
+
+      // After loading/fetching data, set isLoading to false
+      setIsLoading(false);
+    };
+
+    fetchData(); // Call your loading logic here
+  }, []);
 
   return (
+
     <div>
+      {isLoading ? ( // Render the loader if isLoading is true
+        <div className="loader-container">
+          <div className="loader"></div>
+        </div>
+      ) : (
+        // Render the profile content when not loading
+        <>
       <Navbar id={id} />
       <section
         className='flex flex-wrap w-full h-auto mx-auto'>
@@ -137,6 +143,7 @@ const Profile = () => {
               >
                 <SocialIcon network="linkedin" />
               </button>
+                
             </div>
 
           </div>
@@ -207,7 +214,8 @@ const Profile = () => {
       </section>
 
       <StarsCanvas />
-
+      </>
+      )}
     </div>
   )
 }
