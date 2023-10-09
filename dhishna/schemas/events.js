@@ -36,6 +36,7 @@ export default defineType({
           {title: 'Event', value: 'event'}
         ],
       },
+      validation : Rule => Rule.required(),
     }),
     defineField({
       name: 'event_code',
@@ -144,6 +145,7 @@ export default defineType({
           {title: 'Paid', value: 'paid'},
         ],
       },
+      validation : Rule => Rule.required(),
     }),
     defineField({
       name:'price',

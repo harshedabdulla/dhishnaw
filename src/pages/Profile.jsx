@@ -20,18 +20,6 @@ const Profile = () => {
     {
       id: "/",
       title: "Home",
-    },
-    {
-      id: "/#workshop",
-      title: "Workshop",
-    }
-    , {
-      id: "/#contact",
-      title: "Contact",
-    }
-    , {
-      id: "/#testimonials",
-      title: "Testimonials",
     }
   ]
   const registeredEvents = [
@@ -147,7 +135,7 @@ const Profile = () => {
               options={{ max: 25, scale: 1.1 }} // Tilt options
             >
               <div className="bg-tertiary orange-red-gradient shadow-md p-6 rounded-xl sm:text-left">
-                <div className="flex justify-center sm:justify-between items-center mb-4 mx-4">
+                <div className="flex justify-center sm:justify-between items-center gap-x-48 mb-4 mx-4">
                   <h1 className="text-3xl font-bold mb-4">Dhishna 2023</h1>
                   {auth?.currentUser && <h2 className="text-xl font-medium mb-4">#{auth.currentUser.uid.substring(auth.currentUser.uid.length - 5)}</h2>}
                 </div>

@@ -8,7 +8,6 @@ import sanityClient from '../client'
 import { useEffect } from 'react'
 import imageUrlBuilder from '@sanity/image-url'
 import { useStateContext } from '../context/stateContext'
-import { db } from '../firebase/config'
 
 
 const Popup = ({ index, title, event_type, uniquecode, event_code, ticket_type, icon,Contact, details, cover, price, register, onRegisterClick,urlFor }) => {
@@ -52,12 +51,12 @@ const Popup = ({ index, title, event_type, uniquecode, event_code, ticket_type, 
       }else if(res.data.already){
         window.location.href = register;
       }
-      console.log(res)
+      // console.log(res)
     } catch (error) {
-      //console.log(error)
+      // console.log(error)
     }
   }
-  //console.log(urlFor(cover))
+  // console.log(urlFor(cover))
   return (
     <div>
       <div className="fixed inset-0 bg-black opacity-90 " ></div>
@@ -104,7 +103,7 @@ const ServiceCard = ({ index, title, icon, details, price, register, onRegisterC
   return (
     <div className="md:w-[580px] px-4 sm:w-[480px] w-full tracking-wider">
       <div className='w-full orange-red-gradient p-[1px] rounded-[20px] shadow-card'>
-        <div className='bg-[#332d2a] randombg rounded-[20px] py-6 px-4 md:px-12 md:h-[450px] flex flex-col justify-between items-center'>
+        <div className='bg-[#332d2a] randombg rounded-[20px] py-6 px-4 md:px-12 md:min-h-[450px] flex flex-col justify-between items-center'>
         <div className="flex items-center">
   {icon && (
     <img src={urlFor(icon)} alt={title} className='w-16 h-16 object-contain rounded-full' />
@@ -150,7 +149,7 @@ const About = () => {
 
 
   React.useEffect(() => {
-    //console.log(services)
+    // console.log(services)
     if (services.length == 0) {
       fetchServices()
     }
@@ -170,7 +169,7 @@ const About = () => {
         setSearchData(filteredData);
       }
     } catch (error) {
-      console.error("An error occurred:", error);
+      // console.error("An error occurred:", error);
     }
   };
 
@@ -187,13 +186,13 @@ const About = () => {
         setSearchData(filteredData);
       }
     } catch (error) {
-      console.error("An error occurred:", error);
+      // console.error("An error occurred:", error);
     }
   };
 
 
   const handleRegisterClick = (title) => {
-    //console.log(title)
+    // console.log(title)
     setSelectedId(title);
   }
 
