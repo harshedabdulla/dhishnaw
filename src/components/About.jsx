@@ -10,13 +10,21 @@ import imageUrlBuilder from '@sanity/image-url'
 import { useStateContext } from '../context/stateContext'
 
 
-const Popup = ({ index, title, event_type, uniquecode, event_code, ticket_type, icon,Contact, details, cover, price, register, onRegisterClick,urlFor }) => {
+const Popup = ({ index, title, event_type, uniquecode, event_code, ticket_type, icon, Contact, details, cover, price, register, onRegisterClick, urlFor }) => {
   const [refe, setRef] = React.useState('')
   const [error, setError] = React.useState(false);
-  const {userDetails} = useStateContext()
+  const [loading, setLoading] = React.useState(false);
+  const { userDetails } = useStateContext()
+  React.useEffect(() => {
+    if (!auth?.currentUser) {
+      setError(true)
+    }
+  }, [auth])
   const handleRegister = async (event_type, ticket_type, event_code, phone_no, refe, register) => {
     try {
-      //console.log(phone_no, ticket_type, event_type, event_code, refe, register)
+      // window.location.href = register;
+      // console.log(phone_no, ticket_type, event_type, event_code, refe, register)
+      setLoading(true)
       const formData = new FormData();
       formData.append('name', auth?.currentUser?.displayName);
       formData.append('phone_no', phone_no);
@@ -31,18 +39,26 @@ const Popup = ({ index, title, event_type, uniquecode, event_code, ticket_type, 
         }
       }
       //console.log(register)
+      // db.collection('DATA')
+      // .add(formData)
+      // .then((docRef) => {
+      //   console.log('Document written with ID: ', docRef.id);
+      // })
+      // .catch((error) => {
+      //   console.error('Error adding document: ', error);
+      // });
       const res = await axios.post('https://neol7a57w4hxyq6iscz77r3uri0zeali.lambda-url.us-east-1.on.aws/add_registration_data', formData, headers)
-      if(res.data.success == 1){
+      if (res.data.success == 1) {
         window.location.href = register;
-      }else if(res.data.already){
+      } else if (res.data.already) {
         window.location.href = register;
       }
-      //console.log(res)
+      // console.log(res)
     } catch (error) {
-      //console.log(error)
+      // console.log(error)
     }
   }
-  //console.log(urlFor(cover))
+  // console.log(urlFor(cover))
   return (
     <div>
       <div className="fixed inset-0 bg-black opacity-90 " ></div>
@@ -70,9 +86,24 @@ const Popup = ({ index, title, event_type, uniquecode, event_code, ticket_type, 
             </div>
             <div className="flex justify-between items-center my-5">
               <p className="text-[#FF884B] text-lg font-bold">{price}</p>
-              <input type="text" placeholder="Enter referral code" name="" className='bg-white text-black pl-3 py-3 rounded-[5px]' onChange={(e) => setRef(e.target.value)} id="" />
-              <button onClick={() => handleRegister(event_type, ticket_type, event_code, userDetails.phone || '666', refe || '666', register)} className="bg-[#FF884B] text-white text-[16px] md:text-base mt-2 font-medium py-2 px-4 rounded-[10px] hover:bg-[#FF783D] transition-all duration-200 tracking-wider"
-              >Register</button>
+              {auth?.currentUser &&
+                <div className='flex flex-col'>
+                  <input type="text" placeholder="Enter referral code" name="" className='bg-white text-black pl-3 py-3 rounded-[5px]' onChange={(e) => setRef(e.target.value)} id="" />
+
+                  {!loading ? 
+                  (<button onClick={() => handleRegister(event_type, ticket_type, event_code, userDetails.phone || '666', refe || '666', register)} className="bg-[#FF884B] text-white flex gap-x-2 text-[16px] md:text-base mt-2 font-medium py-2 px-4 rounded-[10px] justify-center hover:bg-[#FF783D] transition-all duration-200 tracking-wider"
+                  >Register
+                  </button>)
+                  :
+                    (<>
+                      <button className="bg-[#FF884B] text-white flex gap-x-2 text-[16px] md:text-base mt-2 font-medium py-2 px-4 rounded-[10px] justify-center hover:bg-[#FF783D] transition-all duration-200 tracking-wider"
+                      >
+                      <div className='spinner'></div>
+                      </button>
+                    </>)
+                  }
+
+                </div>}
             </div>
             {error && <p className="text-red-500 text-sm mt-2">Please Login to Register.</p>}
           </div>
@@ -89,24 +120,24 @@ const ServiceCard = ({ index, title, icon, details, price, register, onRegisterC
   return (
     <div className="md:w-[580px] px-4 sm:w-[480px] w-full tracking-wider">
       <div className='w-full orange-red-gradient p-[1px] rounded-[20px] shadow-card'>
-        <div className='bg-[#332d2a] randombg rounded-[20px] py-6 px-4 md:px-12 md:h-[450px] flex flex-col justify-between items-center'>
-        <div className="flex items-center">
-  {icon && (
-    <img src={urlFor(icon)} alt={title} className='w-16 h-16 object-contain rounded-full' />
-  )}
-  {title && (
-    <h1 className='text-white text-lg md:text-xl font-bold text-center ml-4'>{title}</h1>
-  )}
-</div>
-            {details && (
-              <p className={` ${clamp ? "line-clamp-none" : "line-clamp-3 md:line-clamp-6"}  text-white tracking-wider text-base md:text-lg font-medium text-center my-4`}
-                onClick={() => {
-                  setClamp(!clamp);
-                }}>
-                {details}
-              </p>
+        <div className='bg-[#332d2a] randombg rounded-[20px] py-6 px-4 md:px-12 md:min-h-[450px] flex flex-col justify-between items-center'>
+          <div className="flex items-center">
+            {icon && (
+              <img src={urlFor(icon)} alt={title} className='w-16 h-16 object-contain rounded-full' />
             )}
-         
+            {title && (
+              <h1 className='text-white text-lg md:text-xl font-bold text-center ml-4'>{title}</h1>
+            )}
+          </div>
+          {details && (
+            <p className={` ${clamp ? "line-clamp-none" : "line-clamp-3 md:line-clamp-6"}  text-white tracking-wider text-base md:text-lg font-medium text-center my-4`}
+              onClick={() => {
+                setClamp(!clamp);
+              }}>
+              {details}
+            </p>
+          )}
+
           <div className="flex justify-between w-full mt-4 md:mt-6">
             {price && (
               <p className='text-white text-sm md:text-base text-center font-bold flex my-auto'>Price: <span className='text-[#FF884B]'>{price}</span></p>
@@ -135,7 +166,7 @@ const About = () => {
 
 
   React.useEffect(() => {
-    //console.log(services)
+    // console.log(services)
     if (services.length == 0) {
       fetchServices()
     }
@@ -155,7 +186,7 @@ const About = () => {
         setSearchData(filteredData);
       }
     } catch (error) {
-      console.error("An error occurred:", error);
+      // console.error("An error occurred:", error);
     }
   };
 
@@ -172,19 +203,19 @@ const About = () => {
         setSearchData(filteredData);
       }
     } catch (error) {
-      console.error("An error occurred:", error);
+      // console.error("An error occurred:", error);
     }
   };
 
 
   const handleRegisterClick = (title) => {
-    //console.log(title)
+    // console.log(title)
     setSelectedId(title);
   }
 
   return (
     <>
-      <motion.div>
+      <motion.div id="workshop">
         <h2 className={`${styles.sectionHeadText} text-center tracking-wider`}>Workshops</h2>
         {/*seach bar */}
         <div className='w-full flex flex-col items-center gap-4 mt-8 md:flex-row md:justify-center md:items-center px-8 '>

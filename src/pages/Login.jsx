@@ -66,16 +66,19 @@ const Login = () => {
         {user ? (
           <>
             <div className='flex flex-col md:hidden gap-3'>
-              <Link to='/profile' className='block  text-base text-white hover:bg-[#FF783D] hover:text-gray-900'>Profile</Link>
+              {/* <Link to='/profile' className='block  text-base text-white hover:bg-[#FF783D] hover:text-gray-900'>Profile</Link> */}
               <div onClick={async () => await auth.signOut()} className='block text-base text-white hover:bg-[#FF783D] hover:text-gray-900'>Logout</div>
             </div>
+            <div className='hidden md:flex flex-row gap-x-6 my-auto items-center'>
+
+            {/* <Link to='/profile' className='font-poppins font-medium text-[22px] text-white  hover:text-gray-200 hover:cursor-pointer'>Profile</Link> */}
+            <div onClick={async () => await auth.signOut()} className='font-poppins font-medium text-[22px] text-white  hover:text-gray-200 hover:cursor-pointer'>Logout</div>
             <img src={`${userDetails.profileimg ? ` data:image/jpeg;base64,${userDetails.profileimg}` : auth?.currentUser?.photoURL}`} onClick={() => setToggle(toggle => !toggle)} alt='profilephoto' className='hidden md:flex h-9 w-9 rounded-full' />
-            {toggle && (
+            </div>
+            {/* {toggle && (
               <div className={` hidden md:flex flex-col absolute right-28 top-20 bg-white rounded-md shadow-lg py-2 w-40`}>
-                <Link to='/profile' className='block px-4 py-2 text-sm text-gray-700 hover:bg-[#FF783D] hover:text-gray-900 hover:cursor-pointer'>Profile</Link>
-                <div onClick={async () => await auth.signOut()} className='block px-4 py-2 text-sm text-gray-700 hover:bg-[#FF783D] hover:cursor-pointer hover:text-gray-900'>Logout</div>
               </div>
-            )}
+            )} */}
           </>
 
         ) : (

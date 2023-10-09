@@ -10,7 +10,7 @@ const Workshop = () => {
                 <Navbar id={navLinks} />
                 <Hero />
             </div>
-            <section className="relative z-0" id="workshop">
+            <section className="relative z-0" >
             <About />
             <StarsCanvas />
             </section>

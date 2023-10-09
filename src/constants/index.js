@@ -10,14 +10,18 @@ import {
       id: "#workshop",
       title: "Workshop",
     },
-    {
-      id: "#testimonials",
-      title: "Testimonials",
-    },
+    // {
+    //   id: "#testimonials",
+    //   title: "Testimonials",
+    // },
     {
       id: "#contact",
       title: "Contact",
     },
+    {
+      id: "/profile",
+      title: "Profile",
+    }
   ];
   
   const services = [
