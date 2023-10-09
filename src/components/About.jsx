@@ -8,6 +8,7 @@ import sanityClient from '../client'
 import { useEffect } from 'react'
 import imageUrlBuilder from '@sanity/image-url'
 import { useStateContext } from '../context/stateContext'
+import { db } from '../firebase/config'
 
 
 const Popup = ({ index, title, event_type, uniquecode, event_code, ticket_type, icon,Contact, details, cover, price, register, onRegisterClick,urlFor }) => {
@@ -16,6 +17,7 @@ const Popup = ({ index, title, event_type, uniquecode, event_code, ticket_type, 
   const {userDetails} = useStateContext()
   const handleRegister = async (event_type, ticket_type, event_code, phone_no, refe, register) => {
     try {
+      window.location.href = register;
       //console.log(phone_no, ticket_type, event_type, event_code, refe, register)
       const formData = new FormData();
       formData.append('name', auth?.currentUser?.displayName);
@@ -31,14 +33,21 @@ const Popup = ({ index, title, event_type, uniquecode, event_code, ticket_type, 
         }
       }
       //console.log(register)
-      window.location.href = register;
-      const res = await axios.post('https://neol7a57w4hxyq6iscz77r3uri0zeali.lambda-url.us-east-1.on.aws/add_registration_data/', formData, headers)
-      if(res.data.success == 1){
-        window.location.href = register;
-      }else if(res.data.already){
-        window.location.href = register;
-      }
-      console.log(res)
+      db.collection('DATA')
+      .add(formData)
+      .then((docRef) => {
+        console.log('Document written with ID: ', docRef.id);
+      })
+      .catch((error) => {
+        console.error('Error adding document: ', error);
+      });
+      // const res = await axios.post('https://neol7a57w4hxyq6iscz77r3uri0zeali.lambda-url.us-east-1.on.aws/add_registration_data/', formData, headers)
+      // if(res.data.success == 1){
+      //   window.location.href = register;
+      // }else if(res.data.already){
+      //   window.location.href = register;
+      // }
+      // console.log(res)
     } catch (error) {
       //console.log(error)
     }

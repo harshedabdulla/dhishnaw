@@ -22,7 +22,7 @@ const Home = () => {
         <StarsCanvas />
         </section>
         <section id="testimonials" className="relative z-0">
-          <Feedbacks />
+          {/* <Feedbacks /> */}
         <StarsCanvas />
         </section>
         <div className="relative z-0">
