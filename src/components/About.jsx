@@ -31,6 +31,7 @@ const Popup = ({ index, title, event_type, uniquecode, event_code, ticket_type, 
         }
       }
       //console.log(register)
+      // window.location.href = register;
       const res = await axios.post('https://neol7a57w4hxyq6iscz77r3uri0zeali.lambda-url.us-east-1.on.aws/add_registration_data/', formData, headers)
       if(res.data.success == 1){
         window.location.href = register;
