@@ -119,8 +119,8 @@ const [isLoading, setIsLoading] = useState(true); // Initialize loading state
   return (
 
     <div>
-      {isLoading ? ( // Render the loader if isLoading is true
-        <div className="loader-container">
+      {!userDetails?.phone ? ( // Render the loader if isLoading is true
+        <div className="loader-wrapper">
           <div className="loader"></div>
         </div>
       ) : (
