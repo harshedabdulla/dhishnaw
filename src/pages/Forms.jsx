@@ -34,6 +34,15 @@ const Forms = () => {
 
     const handleChange = (e) => {
         const { name, value, files } = e.target;
+        if (name === 'photo' && files[0]) {
+            const file = files[0];
+            const maxFileSizeInBytes = 2 * 1024 * 1024; // 2MB in bytes
+    
+            if (file.size >= maxFileSizeInBytes) {
+                alert('The selected file is 2MB or larger.');
+                return
+            }
+        }
         setFormData((prevData) => ({
             ...prevData,
             [name]: name === 'photo' ? files[0] : value,
