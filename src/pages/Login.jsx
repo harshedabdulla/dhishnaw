@@ -8,7 +8,7 @@ import { useStateContext } from '../context/stateContext';
 const Login = () => {
   const [user, setUser] = React.useState(false);
   const [toggle, setToggle] = React.useState(false);
-
+  const [loader, setLoader] = React.useState(false);
   React.useEffect(() => {
     auth.onAuthStateChanged((user) => {
       if (user) {
@@ -29,6 +29,7 @@ const Login = () => {
           'Authorization': auth.currentUser.accessToken
         }
       }
+      setLoader(true)
       const res = await axios.post('https://neol7a57w4hxyq6iscz77r3uri0zeali.lambda-url.us-east-1.on.aws/create_folder', {}, headers)
       if (res.data.new == 1) {
         window.location.replace('/form')
@@ -62,18 +63,23 @@ const Login = () => {
   const { userDetails } = useStateContext()
   return (
     <div>
+      {loader ? (
+        <div className="loader-wrapper">
+          <div className="loader"></div>
+        </div>
+      ) :
       <div className='mx-auto'>
         {user ? (
           <>
             <div className='flex flex-col md:hidden gap-3'>
-              <Link to='/profile' className='block  text-base text-white hover:bg-[#FF783D] hover:text-gray-900'>Profile</Link>
+              {/* <Link to='/profile' className='block  text-base text-white hover:bg-[#FF783D] hover:text-gray-900'>Profile</Link> */}
               <div onClick={async () => await auth.signOut()} className='block text-base text-white hover:bg-[#FF783D] hover:text-gray-900'>Logout</div>
             </div>
             <div className='hidden md:flex flex-row gap-x-6 my-auto items-center'>
 
-            <Link to='/profile' className='font-poppins font-medium text-[22px] text-white  hover:text-gray-200 hover:cursor-pointer'>Profile</Link>
-            <div onClick={async () => await auth.signOut()} className='font-poppins font-medium text-[22px] text-white  hover:text-gray-200 hover:cursor-pointer'>Logout</div>
-            <img src={`${userDetails.profileimg ? ` data:image/jpeg;base64,${userDetails.profileimg}` : auth?.currentUser?.photoURL}`} onClick={() => setToggle(toggle => !toggle)} alt='profilephoto' className='hidden md:flex h-9 w-9 rounded-full' />
+              {/* <Link to='/profile' className='font-poppins font-medium text-[22px] text-white  hover:text-gray-200 hover:cursor-pointer'>Profile</Link> */}
+              <div onClick={async () => await auth.signOut()} className='font-poppins font-medium text-[22px] text-white  hover:text-gray-200 hover:cursor-pointer'>Logout</div>
+              <img src={`${userDetails.profileimg ? ` data:image/jpeg;base64,${userDetails.profileimg}` : auth?.currentUser?.photoURL}`} onClick={() => setToggle(toggle => !toggle)} alt='profilephoto' className='hidden md:flex h-9 w-9 rounded-full' />
             </div>
             {/* {toggle && (
               <div className={` hidden md:flex flex-col absolute right-28 top-20 bg-white rounded-md shadow-lg py-2 w-40`}>
@@ -88,6 +94,8 @@ const Login = () => {
         )}
 
       </div>
+      
+    }
     </div>
 
   )
