@@ -220,7 +220,17 @@ const About = () => {
         </div>
       </motion.div>
       <div className='mt-8 md:mt-16 flex flex-wrap gap-4 md:gap-8 xl:gap-16 justify-center'>
-        {searchData.map((service, index) => (
+        {searchData.sort((a, b) => {
+          if (a.start_date && b.start_date) {
+            return new Date(a.start_date) - new Date(b.start_date);
+          } else if (a.start_date) {
+            return 1;
+          } else if (b.start_date) {
+            return -1;
+          } else {
+            return 0;
+          }
+        }).map(( service, index) => (   
           <ServiceCard key={service.title} index={index} {...service}
             onRegisterClick={() => handleRegisterClick(service.title)}
             urlFor={urlFor}

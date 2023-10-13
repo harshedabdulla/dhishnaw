@@ -59,6 +59,7 @@ export default defineType({
       name: 'start_date',
       title: 'Start Date',
       type: 'date',
+      validation : Rule => Rule.required(),
     }),
     defineField({
       name: 'start_time',
