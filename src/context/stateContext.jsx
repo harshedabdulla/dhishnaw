@@ -85,8 +85,21 @@ export const StateContextProvider = ({ children }) => {
             venue
           }`).then((data) => {
             //console.log('lol')
-            setServices(data)
-            setSearchData(data)
+            const filteredData2 = data.filter((item) => {
+                const currentdate = new Date();
+                let month = currentdate.getMonth() + 1;
+                let day = currentdate.getDate();     
+                const eventDate = item.start_date.split('-')[2]
+                const eventMonth = item.start_date.split('-')[1]
+      
+                if((parseInt(eventMonth) < month) || (parseInt(eventMonth) == month && parseInt(eventDate) < day)){
+                  return 0
+                }else{
+                  return item
+                }
+              })
+            setServices(filteredData2)
+            setSearchData(filteredData2)
           }).catch(console.error)
     }
   return (
