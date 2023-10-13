@@ -73,7 +73,7 @@ const Contact = () => {
       >
         {/* <p className={styles.sectionSubText}>Get in touch</p> */}
         <h3 className={styles.sectionHeadText}>Contact</h3>
-        <p className={styles.sectionSubText}>Phone: +91 85890 03324</p>
+        <p className={styles.sectionSubText}>Phone: +91 90610 71530</p>
         <p className={styles.sectionSubText}>Email: support@dhishna.org</p>
 
         <form

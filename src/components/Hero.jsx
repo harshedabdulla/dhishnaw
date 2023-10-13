@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { styles } from '../style';
 import { Tilt } from 'react-tilt';
 import { services } from '../constants';
-import Countdown from 'react-countdown';
+// import Countdown from 'react-countdown';
 
 // const CountdownComponent = () => {
 //   // Set the target date and time for the countdown
