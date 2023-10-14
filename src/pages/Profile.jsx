@@ -19,18 +19,6 @@ const Profile = () => {
     {
       id: "/",
       title: "Home",
-    },
-    {
-      id: "/#workshop",
-      title: "Workshop",
-    }
-    , {
-      id: "/#contact",
-      title: "Contact",
-    }
-    , {
-      id: "/#testimonials",
-      title: "Testimonials",
     }
   ]
   const registeredEvents = [
