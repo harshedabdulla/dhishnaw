@@ -39,8 +39,7 @@ const Profile = () => {
 
   const badgeInfo = {
     eventName: 'Dhishna 2023',
-    badgeText: 'Excited to be a part of Dhishna 2023! Come join me at the event. ',
-    badgeImage: { logo3 }, // Replace with the URL to the event badge image
+    badgeText: 'Excited to be a part of Dhishna 2023! Come join me at the workshops and events!\n #Dhishna #Dhishna23 #DhishnaTechFest2023', // Replace with the URL to the event badge image
     badgeStyle: {
       backgroundColor: '#FF884B', // Background color
       color: '#ffffff', // Text color
@@ -59,25 +58,23 @@ const Profile = () => {
   }, [])
 
 
-  // Function to handle sharing on Facebook
   const shareOnFacebook = () => {
-    const url = `https://www.facebook.com/sharer/sharer.php?quote=${encodeURIComponent(badgeInfo.badgeText)}`;
+    const url = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(badgeInfo.badgeImage)}&quote=${encodeURIComponent(badgeInfo.badgeText)}`;
     window.open(url, '_blank', 'width=600,height=400');
   };
-
-  // Function to handle sharing on Twitter
+  
   const shareOnTwitter = () => {
-    const url = `https://twitter.com/intent/tweet?url=${encodeURIComponent(badgeInfo.badgeText)}`;
-    window.open(url, '_blank', 'width=600,height=400')
-  };
-
-  // Function to handle sharing on LinkedIn
-  const shareOnLinkedIn = () => {
-    const url = `https://www.linkedin.com/sharing/share-offsite/?title=${encodeURIComponent(badgeInfo.badgeText)}`;
+    const text = encodeURIComponent(badgeInfo.badgeText);
+    const url = `https://twitter.com/intent/tweet?text=${text}&url=${imageUrl}`;
     window.open(url, '_blank', 'width=600,height=400');
   };
-  const { fetchUserDetails } = useStateContext()
-
+  
+  const shareOnLinkedIn = () => {
+    const url = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(badgeInfo.badgeImage)}&title=${encodeURIComponent(badgeInfo.badgeText)}`;
+    window.open(url, '_blank', 'width=600,height=400');
+  };
+  
+  
   React.useEffect(() => {
     if (services.length == 0) {
       fetchServices()
