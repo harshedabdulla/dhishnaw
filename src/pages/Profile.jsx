@@ -115,7 +115,6 @@ const [isLoading, setIsLoading] = useState(true); // Initialize loading state
     fetchData(); // Call your loading logic here
   }, []);
 
-
   return (
 
     <div>
@@ -125,7 +124,7 @@ const [isLoading, setIsLoading] = useState(true); // Initialize loading state
         </div>
       ) : (
         // Render the profile content when not loading
-        <>      
+        <>
       <Navbar id={id} />
       <section
         className='flex flex-wrap w-full h-auto mx-auto'>
@@ -228,7 +227,7 @@ const [isLoading, setIsLoading] = useState(true); // Initialize loading state
 
       <StarsCanvas />
       </>
-      )}      
+      )}
     </div>
   )
 }
