@@ -7,7 +7,7 @@ import { useStateContext } from '../context/stateContext'
 import { onAuthStateChanged } from 'firebase/auth'
 import { app, auth } from '../firebase/config';
 import { SocialIcon } from 'react-social-icons'
-import logo3 from '../assets/logo3.png'
+
 
 
 
@@ -19,7 +19,20 @@ const Profile = () => {
     {
       id: "/",
       title: "Home",
+    },
+    {
+      id: "/#workshop",
+      title: "Workshop",
     }
+    , {
+      id: "/#contact",
+      title: "Contact",
+    }
+    , {
+      id: "/#testimonials",
+      title: "Testimonials",
+    }
+    
   ]
   const registeredEvents = [
     {
@@ -74,6 +87,7 @@ const Profile = () => {
     window.open(url, '_blank', 'width=600,height=400');
   };
   
+  const { fetchUserDetails } = useStateContext()
   
   React.useEffect(() => {
     if (services.length == 0) {
@@ -87,12 +101,31 @@ const Profile = () => {
     }
     )
 }, [])
+const [isLoading, setIsLoading] = useState(true); // Initialize loading state
+
+  useEffect(() => {
+    const fetchData = async () => {
+      // Simulate loading or fetch data here
+      // For example, await some async operation
+
+      // After loading/fetching data, set isLoading to false
+      setIsLoading(false);
+    };
+
+    fetchData(); // Call your loading logic here
+  }, []);
 
 
   return (
 
     <div>
-      
+      {!userDetails?.phone ? ( // Render the loader if isLoading is true
+        <div className="loader-wrapper">
+          <div className="loader"></div>
+        </div>
+      ) : (
+        // Render the profile content when not loading
+        <>      
       <Navbar id={id} />
       <section
         className='flex flex-wrap w-full h-auto mx-auto'>
@@ -194,8 +227,8 @@ const Profile = () => {
           </section>
 
       <StarsCanvas />
-     
-      
+      </>
+      )}      
     </div>
   )
 }
