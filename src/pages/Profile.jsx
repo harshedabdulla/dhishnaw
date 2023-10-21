@@ -32,7 +32,6 @@ const Profile = () => {
       id: "/#testimonials",
       title: "Testimonials",
     }
-    
   ]
   const registeredEvents = [
     {
