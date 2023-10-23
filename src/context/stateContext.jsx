@@ -30,7 +30,7 @@ export const StateContextProvider = ({ children }) => {
                 }
             }
             const res = await axios.get('https://neol7a57w4hxyq6iscz77r3uri0zeali.lambda-url.us-east-1.amazonaws.com/user', headers)
-            console.log('OKAYOKAY', res)
+            // console.log('OKAYOKAY', res)
             if(res.data.user_data){
                 const jsonData1 = JSON.parse(res.data.user_data)
                 const jsonData2 = JSON.parse(res.data.event_details)
