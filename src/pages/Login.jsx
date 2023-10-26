@@ -63,11 +63,7 @@ const Login = () => {
   const { userDetails } = useStateContext()
   return (
     <div>
-      {loader ? (
-        <div className="loader-wrapper">
-          <div className="loader"></div>
-        </div>
-      ) :
+      
       <div className='mx-auto'>
         {user ? (
           <>
@@ -95,7 +91,7 @@ const Login = () => {
 
       </div>
       
-    }
+  
     </div>
 
   )

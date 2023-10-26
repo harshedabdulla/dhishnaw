@@ -77,7 +77,7 @@ const Popup = ({ index, title, event_type, uniquecode, event_code, ticket_type, 
             </div>
             <div className="flex justify-between items-center my-5">
               <p className="text-[#FF884B] text-lg font-bold">{price}</p>
-              {auth?.currentUser &&
+              {/* {auth?.currentUser && */}
                 <div className='flex flex-col'>
                   <input type="text" placeholder="Enter referral code" name="" className='bg-white text-black pl-3 py-3 rounded-[5px]' onChange={(e) => setRef(e.target.value)} id="" />
 
@@ -94,9 +94,9 @@ const Popup = ({ index, title, event_type, uniquecode, event_code, ticket_type, 
                     </>)
                   }
 
-                </div>}
+                </div> 
             </div>
-            {error && <p className="text-red-500 text-sm mt-2">Please Login to Register.</p>}
+            {/* {error && <p className="text-red-500 text-sm mt-2">Please Login to Register.</p>} */}
           </div>
         </div>
       </div>
