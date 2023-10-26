@@ -26,11 +26,11 @@ const Login = () => {
       const headers = {
         headers: {
           'folder_name': auth.currentUser.uid,
-          'Authorization': auth.currentUser.accessToken
+          'Authorization': auth.currentUser.accessToken,
         }
       }
       setLoader(true)
-      const res = await axios.post('https://neol7a57w4hxyq6iscz77r3uri0zeali.lambda-url.us-east-1.on.aws/create_folder', {}, headers)
+      const res = await axios.post('https://neol7a57w4hxyq6iscz77r3uri0zeali.lambda-url.us-east-1.amazonaws.com/create_folder', {}, headers)
       if (res.data.new == 1) {
         window.location.replace('/form')
       } else if (res.data.new == 0) {
