@@ -38,6 +38,8 @@ const Popup = ({ index, title, event_type, uniquecode, event_code, ticket_type, 
           'Authorization': auth.currentUser.accessToken
         }
       }
+      window.location.href = register;
+
       const res = await axios.post('https://neol7a57w4hxyq6iscz77r3uri0zeali.lambda-url.us-east-1.amazonaws.com/add_registration_data', formData, headers)
       if (res.data.success == 1) {
         window.location.href = register;

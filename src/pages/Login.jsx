@@ -29,13 +29,13 @@ const Login = () => {
           'Authorization': auth.currentUser.accessToken,
         }
       }
-      setLoader(true)
-      const res = await axios.post('https://neol7a57w4hxyq6iscz77r3uri0zeali.lambda-url.us-east-1.amazonaws.com/create_folder', {}, headers)
-      if (res.data.new == 1) {
-        window.location.replace('/form')
-      } else if (res.data.new == 0) {
-        window.location.replace('/profile')
-      }
+      // setLoader(true)
+      // const res = await axios.post('https://neol7a57w4hxyq6iscz77r3uri0zeali.lambda-url.us-east-1.amazonaws.com/create_folder', {}, headers)
+      // if (res.data.new == 1) {
+      //   window.location.replace('/form')
+      // } else if (res.data.new == 0) {
+      //   window.location.replace('/profile')
+      // }
     } catch (error) {
       //console.log(error)
     }
