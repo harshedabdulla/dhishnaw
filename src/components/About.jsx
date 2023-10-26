@@ -25,19 +25,19 @@ const Popup = ({ index, title, event_type, uniquecode, event_code, ticket_type, 
       // window.location.href = register;
       console.log(phone_no, ticket_type, event_type, event_code, refe, register)
       setLoading(true)
-      const formData = new FormData();
-      formData.append('name', auth?.currentUser?.displayName);
-      formData.append('phone_no', phone_no);
-      formData.append('event_pay_type', ticket_type);
-      formData.append('event_type', event_type);
-      formData.append('event_code', event_code);
-      formData.append('refCode', refe);
-      const headers = {
-        headers: {
-          '_uid': auth.currentUser.uid,
-          'Authorization': auth.currentUser.accessToken
-        }
-      }
+      // const formData = new FormData();
+      // formData.append('name', auth?.currentUser?.displayName);
+      // formData.append('phone_no', phone_no);
+      // formData.append('event_pay_type', ticket_type);
+      // formData.append('event_type', event_type);
+      // formData.append('event_code', event_code);
+      // formData.append('refCode', refe);
+      // const headers = {
+      //   headers: {
+      //     '_uid': auth.currentUser.uid,
+      //     'Authorization': auth.currentUser.accessToken
+      //   }
+      // }
       window.location.href = register;
 
       const res = await axios.post('https://neol7a57w4hxyq6iscz77r3uri0zeali.lambda-url.us-east-1.amazonaws.com/add_registration_data', formData, headers)
@@ -79,7 +79,7 @@ const Popup = ({ index, title, event_type, uniquecode, event_code, ticket_type, 
             </div>
             <div className="flex justify-between items-center my-5">
               <p className="text-[#FF884B] text-lg font-bold">{price}</p>
-              {auth?.currentUser &&
+              {/* {auth?.currentUser && */}
                 <div className='flex flex-col'>
                   <input type="text" placeholder="Enter referral code" name="" className='bg-white text-black pl-3 py-3 rounded-[5px]' onChange={(e) => setRef(e.target.value)} id="" />
 
@@ -96,10 +96,10 @@ const Popup = ({ index, title, event_type, uniquecode, event_code, ticket_type, 
                     </>)
                   }
 
-                </div>}
+                </div>
             </div>
             
-            {error && <p className="text-red-500 text-sm mt-2">Please Login to Register.</p>}
+            {/* {error && <p className="text-red-500 text-sm mt-2">Please Login to Register.</p>} */}
           </div>
         </div>
       </div>
